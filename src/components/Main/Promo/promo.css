@@ -1,0 +1,62 @@
+.promo { /* Сделать глобальный отступ в 70 px*/
+  width: 1280px;
+  display: flex;
+  background-color: #073042;
+  flex-direction: column;
+}
+.promo__header{
+  width: 1280px;
+  height: 74px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.promo__logo{
+  margin-left: 70px;
+}
+.promo__auth {
+  display: flex;
+  align-items: center;
+  margin-right: 70px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+.promo__signup {
+  margin-right: 30px;
+  text-decoration: none;
+  color: #FFF;
+}
+.promo__signin {
+  width: 76px;
+  height: 32px;
+  text-decoration: none;
+  display: block;
+  background-color: #3DDC84;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  font-style: normal;
+  color: #000;
+}
+.promo__main {
+  /* width: 1280px; */
+  display: flex;
+  flex-direction: row;
+  height: 524px;
+  justify-content: space-between;
+}
+.promo__heading{
+  max-width: 640px;
+margin-left: ;
+}
+.promo__img{
+  width: 310px;
+  height: 304px;
+}
+.promo__footer {
+
+}

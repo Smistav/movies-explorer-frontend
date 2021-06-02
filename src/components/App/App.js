@@ -11,18 +11,20 @@ import Footer from "../Footer/Footer";
 function App() {
   return (
       <div className="app">
-        <Header/>
         <Switch>
           <Route exact path="/">
            <Main/>
           </Route>
           <Route path="/movies">
+           <Header/>
            <Movies/>
           </Route>
           <Route path="/saved-movies">
+          <Header/>
            <SavedMovies/>
           </Route>
           <Route path="/profile">
+          <Header/>
            <Profile/>
           </Route>
           <Route path="/signin">
