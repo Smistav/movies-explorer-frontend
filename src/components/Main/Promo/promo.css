@@ -1,23 +1,22 @@
-.promo { /* Сделать глобальный отступ в 70 px*/
+.promo {
   width: 1280px;
   display: flex;
   background-color: #073042;
   flex-direction: column;
 }
-.promo__header{
-  width: 1280px;
+.promo__container {
+  width: 1140px;
+  margin-left: 70px;
+}
+.promo__header {
   height: 74px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.promo__logo{
-  margin-left: 70px;
-}
 .promo__auth {
   display: flex;
   align-items: center;
-  margin-right: 70px;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
@@ -26,14 +25,14 @@
 .promo__signup {
   margin-right: 30px;
   text-decoration: none;
-  color: #FFF;
+  color: #fff;
 }
 .promo__signin {
   width: 76px;
   height: 32px;
   text-decoration: none;
   display: block;
-  background-color: #3DDC84;
+  background-color: #3ddc84;
   text-align: center;
   display: flex;
   align-items: center;
@@ -43,20 +42,50 @@
   color: #000;
 }
 .promo__main {
-  /* width: 1280px; */
   display: flex;
   flex-direction: row;
   height: 524px;
   justify-content: space-between;
 }
-.promo__heading{
+.promo__heading {
   max-width: 640px;
-margin-left: ;
+  margin: 0;
+  padding: 0;
+  margin-top: 75px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 58px;
 }
-.promo__img{
+.promo__paragraph {
+  margin: 0;
+  padding: 0;
+  max-width: 310px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  margin-top: 36px;
+  opacity: 0.5;
+}
+.promo__img {
   width: 310px;
   height: 304px;
+  margin-top: 75px;
+}
+.promo__button {
+  width: 129px;
+  height: 36px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #fff;
+  background-color: #073042;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 3px;
+  margin-top: 146px;
 }
 .promo__footer {
-
+  height: 50px;
 }
