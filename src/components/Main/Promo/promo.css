@@ -1,12 +1,13 @@
 .promo {
-  width: 1280px;
+  max-width: 1280px;
   display: flex;
   background-color: #073042;
   flex-direction: column;
 }
 .promo__container {
-  width: 1140px;
+  max-width: 1140px;
   margin-left: 70px;
+  margin-right: 70px;
 }
 .promo__header {
   height: 74px;
@@ -72,6 +73,7 @@
   width: 310px;
   height: 304px;
   margin-top: 75px;
+  margin-left: 40px;
 }
 .promo__button {
   width: 129px;
