@@ -2,13 +2,13 @@ import React from "react";
 
 function Techs() {
   return (
-    <section className="techs">
-      <div className="techs__container">
-        <h2 className="techs__header">Технологии</h2>
-        <div className="techs__main">
-          <div className="techs__main-block">
-            <h3 className="techs__heading">7 технологий</h3>
-            <p className="techs__paragraph">На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>
+    <section className="main techs">
+      <div className="main__container">
+        <h2 className="main__header techs__header">Технологии</h2>
+        <div className="main__body techs__body">
+          <div className="main__block techs__block">
+            <h3 className="main__title techs__title">7 технологий</h3>
+            <p className="main__subtitle techs__subtitle">На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>
           </div>
         </div>
         <div className="techs__footer">

@@ -1,13 +1,6 @@
 .promo {
-  max-width: 1280px;
-  display: flex;
   background-color: #073042;
-  flex-direction: column;
-}
-.promo__container {
-  max-width: 1140px;
-  margin-left: 70px;
-  margin-right: 70px;
+  margin: 0;
 }
 .promo__header {
   height: 74px;
@@ -15,7 +8,7 @@
   justify-content: space-between;
   align-items: center;
 }
-.promo__auth {
+.promo__sign {
   display: flex;
   align-items: center;
   font-style: normal;
@@ -23,16 +16,15 @@
   font-size: 12px;
   line-height: 16px;
 }
-.promo__signup {
+.promo__sign-up {
   margin-right: 30px;
   text-decoration: none;
   color: #fff;
 }
-.promo__signin {
+.promo__sign-in {
   width: 76px;
   height: 32px;
   text-decoration: none;
-  display: block;
   background-color: #3ddc84;
   text-align: center;
   display: flex;
@@ -42,30 +34,12 @@
   font-style: normal;
   color: #000;
 }
-.promo__main {
-  display: flex;
-  flex-direction: row;
-  height: 524px;
-  justify-content: space-between;
-}
-.promo__heading {
+.promo__title {
   max-width: 640px;
-  margin: 0;
-  padding: 0;
   margin-top: 75px;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 50px;
-  line-height: 58px;
 }
-.promo__paragraph {
-  margin: 0;
-  padding: 0;
+.promo__subtitle {
   max-width: 310px;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 16px;
   margin-top: 36px;
   opacity: 0.5;
 }

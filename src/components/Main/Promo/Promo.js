@@ -4,25 +4,25 @@ import logo from "../../../logo.svg";
 import promo_img from "../../../images/ball_web.svg"
 function Promo() {
   return (
-    <section className="promo">
-      <div className="promo__container">
+    <section className="main promo">
+      <div className="main__container">
         <div className="promo__header">
           <Link to="/">
             <img src={logo} alt="Логотип" className="logo" />
           </Link>
-          <div className="promo__auth">
-            <Link to="signup" className="promo__signup">
+          <div className="promo__sign">
+            <Link to="signup" className="promo__sign-up">
               Регистрация
           </Link>
-            <Link to="signin" className="promo__signin">
+            <Link to="signin" className="promo__sign-in">
               Войти
           </Link>
           </div>
         </div>
-        <div className="promo__main">
+        <div className="main__body">
           <div>
-            <h1 className="promo__heading">Учебный проект студента факультета Веб-разработки.</h1>
-            <p className="promo__paragraph">Листайте ниже, чтобы узнать больше про этот проект и его создателя.</p>
+            <h1 className="main__title promo__title">Учебный проект студента факультета Веб-разработки.</h1>
+            <p className="main__subtitle promo__subtitle">Листайте ниже, чтобы узнать больше про этот проект и его создателя.</p>
             <button className="promo__button">Узнать больше</button>
           </div>
           <img src={promo_img} alt="Картинка WEB земной шар" className="promo__img" />

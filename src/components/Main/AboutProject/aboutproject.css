@@ -1,60 +1,33 @@
-.aboutProject {
-  max-width: 1280px;
-  display: flex;
-  background-color: #202020;
-  flex-direction: column;
+.about-project {
+  margin: 0;
 }
-.aboutProject__container {
-  max-width: 1140px;
-  margin-left: 70px;
-  margin-right: 70px;
-}
-.aboutProject__header {
-  height: 50px;
-  border-bottom: 1px solid #dadada;
-  margin: 110px 0 0 0;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 22px;
-  line-height: 27px;
-}
-.aboutProject__main {
-  display: flex;
+.about-project__body {
   height: 270px;
-  flex-direction: row;
+  justify-content: unset;
 }
-.aboutProject__main-block {
-  max-width: 550px;
-}
-.aboutProject__main-block:first-child {
+.about-project__block:first-child {
   margin-right: 40px;
 }
-.aboutProject__heading {
-  margin: 0;
+.about-project__title {
   padding-top: 70px;
-  font-style: normal;
-  font-weight: normal;
   font-size: 20px;
   line-height: 24px;
 }
-.aboutProject__paragraph {
-  margin: 0;
+.about-project__subtitle {
   padding-top: 26px;
-  font-style: normal;
-  font-weight: normal;
   font-size: 14px;
   line-height: 20px;
 }
-.aboutProject__footer {
+.about-project__footer {
   display: flex;
   margin-bottom: 105px;
   flex-direction: column;
 }
-.aboutProject__footer-row {
+.about-project__footer-row {
   display: flex;
   flex-direction: row;
 }
-.aboutProject__footer-block {
+.about-project__footer-block {
   max-width: 228px;
   width: 100%;
   height: 36px;
@@ -70,14 +43,14 @@
   color: #000;
 }
 
-.aboutProject__footer-block_block_second {
+.about-project__footer-block-second {
   max-width: 912px;
   width: 100%;
   background-color: #303030;
   color: #fff;
 }
 
-.aboutProject__footer-block_blind {
+.about-project__footer-block_blind {
   background-color: #202020;
   font-weight: 500;
   color: #8b8b8b;

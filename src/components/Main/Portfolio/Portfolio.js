@@ -2,20 +2,20 @@ import React from "react";
 
 function Portfolio() {
   return (
-    <section className="portfolio">
-      <div className="portfolio__container">
-        <h2 className="portfolio__header">Портфолио</h2>
-        <div className="portfolio__main">
-          <div className="portfolio__main-block">
-            <a href="https://ya.ru" className="portfolio__heading">
+    <section className="main portfolio">
+      <div className="main__container">
+        <h2 className="main__header portfolio__header">Портфолио</h2>
+        <div className="main__body portfolio__body">
+          <div className="portfolio__block">
+            <a href="https://ya.ru" className="main__title portfolio__title">
               Статичный сайт
             <p className="portfolio__link">↗</p>
             </a>
-            <a href="https://ya.ru" className="portfolio__heading">
+            <a href="https://ya.ru" className="main__title portfolio__title">
               Адаптивный сайт
               <p className="portfolio__link">↗</p>
             </a>
-            <a href="https://ya.ru" className="portfolio__heading">
+            <a href="https://ya.ru" className="main__title portfolio__title">
               Одностраничное приложение
               <p className="portfolio__link">↗</p>
             </a>
