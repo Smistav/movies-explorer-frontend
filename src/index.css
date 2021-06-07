@@ -19,3 +19,9 @@
 
 /* Component Footer */
 @import url('./components/Footer/footer.css');
+
+/* Component Movies */
+@import url('./components/Movies/movies.css');
+
+/* Naviganion */
+@import url('./components/Navigation/navigation.css');

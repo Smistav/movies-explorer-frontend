@@ -1,3 +1,24 @@
 .menu {
-  
+  max-width: 1140px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.menu__block-link {
+  display: flex;
+  max-width: 212px;
+  width: 100%;
+  justify-content: space-between;
+}
+.menu__link {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  text-decoration: none;
+  color: #fff;
+}
+.menu__link_active {
+  font-weight: 500;
 }

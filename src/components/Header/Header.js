@@ -3,11 +3,13 @@ import { Link, Switch, Route } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 function Header() {
   return (
-    <div className="header">
+    <div className="main header">
+      <div className="main__container">
+        <div className="header__block">
           <Switch>
             <Route exact path="/">
-              <Link  to="/">
-                <img src={logo} alt="Логотип" className="logo"/>
+              <Link to="/">
+                <img src={logo} alt="Логотип" className="logo" />
               </Link>
               <Link to="signup">
                 Регистрация
@@ -17,16 +19,16 @@ function Header() {
               </Link>
             </Route>
             <Route path="/movies">
-              <Navigation/>
+              <Navigation />
             </Route>
             <Route path="/saved-movies">
-              <Navigation/>
+              <Navigation />
             </Route>
             <Route path="/profile">
-              <Navigation/>
+              <Navigation />
             </Route>
             <Route path="/signup">
-              <Link  to="signin">
+              <Link to="signin">
                 Войти
               </Link>
             </Route>
@@ -37,6 +39,8 @@ function Header() {
             </Route>
           </Switch>
         </div>
+      </div>
+    </div>
   )
 }
 export default Header;
