@@ -16,3 +16,6 @@
 @import url('./components/Main/Techs/techs.css');
 @import url('./components/Main/AboutMe/aboutme.css');
 @import url('./components/Main/Portfolio/portfolio.css');
+
+/* Component Footer */
+@import url('./components/Footer/footer.css');

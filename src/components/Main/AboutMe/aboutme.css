@@ -35,6 +35,8 @@
   font-size: 14px;
   line-height: 17px;
   margin-right: 20px;
+  color: #fff;
+  text-decoration: none;
 }
 .about-me__img {
   width: 270px;

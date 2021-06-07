@@ -7,16 +7,19 @@ function AboutMe() {
         <h2 className="main__header">Студент</h2>
         <div className="main__body about-me__body">
           <div className="about-me__block">
-            <h3 className="main__title about-me__title">Виталий</h3>
-            <p className="main__subtitle about-me__subtitle">Фронтенд-разработчик, 30 лет</p>
-            <p className="about-me__paragraph">Я родился и живу в Саратове, закончил факультет
-            экономики СГУ. У меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь
-            бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ Контур». После
-            того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл
-            с постоянной работы.</p>
+            <h3 className="main__title about-me__title">Станислав</h3>
+            <p className="main__subtitle about-me__subtitle">Фронтенд-разработчик, 43 года</p>
+            <p className="about-me__paragraph">Я родился и живу в Москве, закончил химико-технологический
+            факультет МГТУ и МВА-логистика ГУУ. У меня есть жена и 2 детей. Я люблю слушать музыку,
+            а ещё увлекаюсь туризмом. Кодить начал со школы. С 2015 года работал в сфере Логистики.
+            После того, как прошёл курс по веб-разработке, начал искать работу по профилю учебы</p>
             <div className="about-me__block-link">
-              <p className="about-me__link">Facebook</p>
-              <p className="about-me__link">Github</p>
+              <a href="https://www.facebook.com/smistav" className="main__subtitle about-me__link">
+                Facebook
+            </a>
+              <a href="https://github.com/Smistav" className="main__subtitle about-me__link">
+                Github
+            </a>
             </div>
           </div>
           <img src={aboutme_img} alt="Фото студента" className="about-me__img" />
