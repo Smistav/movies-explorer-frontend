@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 function AboutProject() {
   return (
@@ -9,13 +8,11 @@ function AboutProject() {
         <div className="aboutProject__main">
           <div className="aboutProject__main-block">
             <h3 className="aboutProject__heading">Дипломный проект включал 5 этапов</h3>
-            <p className="aboutProject__paragraph">Составление плана, работу над бэкендом,
-            вёрстку, добавление функциональности и финальные доработки.</p>
+            <p className="aboutProject__paragraph">Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные доработки.</p>
           </div>
           <div className="aboutProject__main-block">
             <h3 className="aboutProject__heading">На выполнение диплома ушло 5 недель</h3>
-            <p className="aboutProject__paragraph">У каждого этапа был мягкий и жёсткий дедлайн,
-            которые нужно было соблюдать, чтобы успешно защититься.</p>
+            <p className="aboutProject__paragraph">У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.</p>
           </div>
         </div>
         <div className="aboutProject__footer">
