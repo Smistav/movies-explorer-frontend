@@ -54,21 +54,6 @@
   height: 100px;
   position: relative;
 }
-.preloader__button {
-  width: 320px;
-  height: 36px;
-  background-color: #2f2f2f;
-  padding: 0;
-  margin: 0;
-  border: none;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 15px;
-  color: #fff;
-  border-radius: 6px;
-  cursor: pointer;
-}
 
 .preloader__round {
   width: 100px;
