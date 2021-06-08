@@ -1,7 +1,5 @@
 .movie-card-list {
   margin: 80px 0 10px 0;
-}
-.movie-card-list__container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
