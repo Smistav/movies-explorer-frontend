@@ -30,16 +30,6 @@ function Header() {
             <Route path="/profile">
               <Navigation />
             </Route>
-            <Route path="/signup">
-              <Link to="signin">
-                Войти
-              </Link>
-            </Route>
-            <Route path="/signin">
-              <Link to="signup">
-                Регистрация
-              </Link>
-            </Route>
           </Switch>
         </div>
       </div>

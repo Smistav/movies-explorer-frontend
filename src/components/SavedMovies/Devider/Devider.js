@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Devider/devider.css';
+import '../Devider/Devider.css';
 
 function Devider() {
   return (

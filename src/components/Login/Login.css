@@ -92,3 +92,17 @@
   color: #4285f4;
   text-decoration: none;
 }
+.popup__error {
+  display: none;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #ee3465;
+  position: absolute;
+  left: 0;
+  top: 51px;
+}
+.popup__error_visible {
+  display: block;
+}

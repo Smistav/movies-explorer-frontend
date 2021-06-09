@@ -24,6 +24,9 @@ function Register() {
             autoComplete="off"
             required
           />
+          <span id="name-input-error" className="popup__error popup__error_visible">
+            Что-то пошло не так...
+          </span>
         </div>
         <div className="popup__input-container">
           <p className="popup__input-header">E-mail</p>
@@ -38,6 +41,9 @@ function Register() {
             autoComplete="off"
             required
           />
+          <span id="email-input-error" className="popup__error popup__error_visible">
+            Что-то пошло не так...
+          </span>
         </div>
         <div className="popup__input-container">
           <p className="popup__input-header">Пароль</p>
@@ -52,6 +58,9 @@ function Register() {
             autoComplete="off"
             required
           />
+          <span id="password-input-error" className="popup__error popup__error_visible">
+            Что-то пошло не так...
+          </span>
         </div>
         <button type="submit" name="button" className="popup__button">Зарегистрироваться</button>
         <div className="popup__block-link">

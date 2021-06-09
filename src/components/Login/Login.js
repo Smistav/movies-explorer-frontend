@@ -6,7 +6,7 @@ import './Login.css';
 function Login() {
   return (
     <main>
-      <form name="form_login" className="popup__container popup__container_form_login" noValidate>
+      <form name="form_login" className="popup__container" noValidate>
         <Link className="popup__link" to="/">
           <Logo />
         </Link>
@@ -24,6 +24,9 @@ function Login() {
             autoComplete="off"
             required
           />
+          <span id="email-input-error" className="popup__error popup__error_visible">
+            Что-то пошло не так...
+          </span>
         </div>
         <div className="popup__input-container">
           <p className="popup__input-header">Пароль</p>
@@ -38,6 +41,9 @@ function Login() {
             autoComplete="off"
             required
           />
+          <span id="password-input-error" className="popup__error">
+            Что-то пошло не так...
+          </span>
         </div>
         <button type="submit" name="button" className="popup__button">Войти</button>
         <div className="popup__block-link">
