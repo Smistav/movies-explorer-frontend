@@ -17,7 +17,6 @@ function MoviesCard({ card }) {
   return (
     <figure onMouseOver={handleRemove} onMouseOut={handleRemoveOut} className="movies-card">
       <img src={card.link} alt={card.name} className="movies-card__img" />
-      <span className="movies-card__mask"><i className="img__icon"></i></span>
       <figcaption className="movies-card__description">
         <h3 className="movies-card__title">{card.name}</h3>
         <button className="movies-card__remove" />
