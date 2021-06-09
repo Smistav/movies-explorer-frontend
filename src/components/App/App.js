@@ -38,8 +38,6 @@ function App() {
         <Route path="/signup">
           <Register />
         </Route>
-        <Route>
-        </Route>
       </Switch>
     </div>
   )
