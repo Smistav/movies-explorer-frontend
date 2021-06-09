@@ -1,8 +1,9 @@
 import React from "react";
+import './SavedMovies.css';
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import Devider from "../SavedMovies/Devider/Devider";
-import './saved-movies.css';
+
 function SavedMovies() {
   return (
     <section className="main movies">

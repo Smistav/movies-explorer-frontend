@@ -1,4 +1,5 @@
 import React from 'react';
+import './MoviesCard.css';
 
 function MoviesCard({ card }) {
   const time = ~~(card.time / 60) + 'ч ' + (card.time % 60) + 'м';

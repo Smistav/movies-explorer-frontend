@@ -1,13 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import logo from "../../logo.svg";
+import './Navigation.css';
 import account_icon from "../../images/account-icon.svg";
+import Logo from '../Logo/Logo';
 
 function Navigation() {
   return (
     <nav className="menu">
       <NavLink exact to="/" activeClassName="menu__link_active" className="menu__link">
-        <img src={logo} alt="Логотип" className="logo" />
+        <Logo />
       </NavLink>
       <div className='menu__block-link'>
         <NavLink to="/movies" activeClassName="menu__link_active" className="menu__link">

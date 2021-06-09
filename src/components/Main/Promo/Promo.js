@@ -1,14 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../../logo.svg";
+import './Promo.css';
+import Logo from "../../Logo/Logo";
 import promo_img from "../../../images/ball_web.svg"
+
 function Promo() {
   return (
     <section className="main promo">
       <div className="main__container">
         <div className="promo__header">
           <Link to="/">
-            <img src={logo} alt="Логотип" className="logo" />
+            <Logo />
           </Link>
           <div className="promo__sign">
             <Link to="signup" className="promo__sign-up">

@@ -1,5 +1,7 @@
 import React from "react";
+import './AboutMe.css';
 import aboutme_img from "../../../images/photo_me.jpeg"
+
 function AboutMe() {
   return (
     <section className="main about-me">

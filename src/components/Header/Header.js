@@ -1,6 +1,9 @@
-import logo from "../../logo.svg";
+import React from 'react';
 import { Link, Switch, Route } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
+import Logo from "../Logo/Logo";
+import './Header.css';
+
 function Header() {
   return (
     <div className="main header">
@@ -9,7 +12,7 @@ function Header() {
           <Switch>
             <Route exact path="/">
               <Link to="/">
-                <img src={logo} alt="Логотип" className="logo" />
+                <Logo />
               </Link>
               <Link to="signup">
                 Регистрация

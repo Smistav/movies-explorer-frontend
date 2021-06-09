@@ -1,9 +1,11 @@
 import React from "react";
-function Profile(){
-  return(
-<section>
-  Profile
-</section>
+import './Profile.css';
+
+function Profile() {
+  return (
+    <section>
+      Profile
+    </section>
   )
 }
 export default Profile

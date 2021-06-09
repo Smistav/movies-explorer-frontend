@@ -1,7 +1,7 @@
 import React from 'react';
+import '../MoviesCardList/MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import cards_saved from '../../../utils/cards_saved';
-import '../MoviesCardList/movies-card-list.css';
 
 function MoviesCardList() {
   return (

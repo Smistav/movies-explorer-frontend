@@ -1,6 +1,8 @@
 import React from 'react';
+import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import cards from '../../../utils/cards';
+
 function MoviesCardList() {
   return (
     <section className="movie-card-list">
