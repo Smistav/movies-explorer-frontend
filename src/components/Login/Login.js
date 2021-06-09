@@ -10,7 +10,6 @@ function Login() {
         <Link className="popup__link" to="/">
           <Logo />
         </Link>
-
         <h4 className="popup__header">Рады видеть!</h4>
         <div className="popup__input-container">
           <p className="popup__input-header">E-mail</p>
@@ -22,6 +21,7 @@ function Login() {
             type="email"
             minLength="2"
             maxLength="40"
+            autoComplete="off"
             required
           />
         </div>
@@ -35,6 +35,7 @@ function Login() {
             type="password"
             minLength="2"
             maxLength="100"
+            autoComplete="off"
             required
           />
         </div>
