@@ -9,7 +9,7 @@ function Footer() {
         <h4 className="main__header footer__header">Учебный проект Яндекс.Практикум х BeatFilm.</h4>
         <div className="main__body footer__body">
           <p className="main__subtitle"> © {year.toLocaleString("ru-Ru", { year: "numeric" })}</p>
-          <div className="footer__block-link">
+          <nav className="footer__block-link">
             <a href="https://praktikum.yandex.ru/" className="main__subtitle footer__link">
               Яндекс.Практикум
             </a>
@@ -19,7 +19,7 @@ function Footer() {
             <a href="https://www.facebook.com/smistav" className="main__subtitle footer__link">
               Facebook
             </a>
-          </div>
+          </nav>
         </div>
       </div>
     </footer >
