@@ -6,7 +6,7 @@ function PopupForm({ name, title, buttonName, underButtonText, underButtonName, 
   return (
     <div>
       <form name={`form_${name}`} className="popup__container" noValidate>
-        <Link className="popup__link" to="/">
+        <Link className="main__link" to="/">
           <Logo />
         </Link>
         <h4 className="popup__header">{title}</h4>
@@ -15,7 +15,7 @@ function PopupForm({ name, title, buttonName, underButtonText, underButtonName, 
           {buttonName}</button>
         <div className="popup__block-link">
           <p className="popup__paragraph">{underButtonText}</p>
-          <Link to={path} className="popup__link popup__link_position_bottom">
+          <Link to={path} className="main__link popup__link-bottom">
             {underButtonName}
           </Link>
         </div>

@@ -22,8 +22,8 @@ function Profile() {
           </p>
         </div>
         <div className="profile__body profile__footer">
-          <p className="profile__link">Редактировать</p>
-          <Link className="profile__link profile__link_signout" to="/">
+          <p className="main__link profile__link">Редактировать</p>
+          <Link className="main__link profile__link profile__link_signout" to="/">
             Выйти из аккаунта
           </Link>
         </div>

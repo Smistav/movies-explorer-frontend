@@ -7,20 +7,20 @@ import Logo from '../Logo/Logo';
 function Navigation() {
   return (
     <nav className="menu">
-      <NavLink exact to="/" activeClassName="menu__link_active" className="menu__link">
+      <NavLink exact to="/" activeClassName="menu__link_active" className="main__link menu__link">
         <Logo />
       </NavLink>
       <div className='menu__block-link'>
-        <NavLink to="/movies" activeClassName="menu__link_active" className="menu__link">
+        <NavLink to="/movies" activeClassName="menu__link_active" className="main__link menu__link">
           Фильмы
         </NavLink>
-        <NavLink to="/saved-movies" activeClassName="menu__link_active" className="menu__link">
+        <NavLink to="/saved-movies" activeClassName="menu__link_active" className="main__link menu__link">
           Сохраненные фильмы
         </NavLink>
       </div>
-      <NavLink to="/profile" activeClassName="menu__link_active" className="menu__link menu__link_image">
+      <NavLink to="/profile" activeClassName="menu__link_active" className="main__link menu__link menu__link_image">
         Аккаунт
-        <img src={account_icon} alt="иконка" className="menu__account-icon" />
+        <img src={account_icon} alt="иконка" className="main__link menu__account-icon" />
       </NavLink>
     </nav>
   )

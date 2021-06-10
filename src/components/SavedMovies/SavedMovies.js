@@ -2,7 +2,7 @@ import React from "react";
 import './SavedMovies.css';
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import SearchForm from "../Movies/SearchForm/SearchForm";
-import Devider from "../SavedMovies/Devider/Devider";
+import Devider from "./Devider/Devider";
 
 function SavedMovies() {
   return (

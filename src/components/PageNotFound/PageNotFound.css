@@ -24,10 +24,5 @@
   font-size: 14px;
   line-height: 17px;
   text-align: center;
-  text-decoration: none;
   color: #4285f4;
-  cursor: pointer;
-}
-.page-not-found__link:hover {
-  opacity: 0.6;
 }
