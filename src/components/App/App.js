@@ -8,6 +8,7 @@ import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Footer from "../Footer/Footer";
+import PageNotFound from "../PageNotFound/PageNotFound";
 import './App.css';
 
 function App() {
@@ -37,6 +38,9 @@ function App() {
         </Route>
         <Route path="/signup">
           <Register />
+        </Route>
+        <Route path="*">
+          <PageNotFound />
         </Route>
       </Switch>
     </div>
