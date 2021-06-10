@@ -1,17 +1,16 @@
-import Logo from "../Logo/Logo";
+import React from 'react';
 import { Link } from "react-router-dom";
 import './PopupForm.css';
 
-function PopupForm({ name, title, buttonName, underButtonText, underButtonName, path, children }) {
+function PopupForm({ name, title, buttonName, underButtonText,
+  underButtonName, path, children }) {
   return (
     <div>
       <form name={`form_${name}`} className="popup__container" noValidate>
-        <Link className="main__link" to="/">
-          <Logo />
-        </Link>
         <h4 className="popup__header">{title}</h4>
         {children}
-        <button type="submit" name="button" className={`main__link popup__button popup__button_form_${name}`}>
+        <button type="submit" name="button" className={`main__link 
+        popup__button popup__button_form_${name}`}>
           {buttonName}</button>
         <div className="popup__block-link">
           <p className="popup__paragraph">{underButtonText}</p>
