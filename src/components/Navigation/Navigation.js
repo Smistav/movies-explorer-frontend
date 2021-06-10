@@ -18,7 +18,7 @@ function Navigation() {
           Сохраненные фильмы
         </NavLink>
       </div>
-      <NavLink to="/profile" activeClassName="menu__link_active" className="main__link menu__link menu__link_image">
+      <NavLink to="/profile" activeClassName="menu__link_active" className="main__link menu__link menu__link-image">
         Аккаунт
         <img src={account_icon} alt="иконка" className="main__link menu__account-icon" />
       </NavLink>
