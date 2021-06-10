@@ -11,7 +11,7 @@ function PopupForm({ name, title, buttonName, underButtonText, underButtonName, 
         </Link>
         <h4 className="popup__header">{title}</h4>
         {children}
-        <button type="submit" name="button" className={`popup__button popup__button_form_${name}`}>
+        <button type="submit" name="button" className={`main__link popup__button popup__button_form_${name}`}>
           {buttonName}</button>
         <div className="popup__block-link">
           <p className="popup__paragraph">{underButtonText}</p>
