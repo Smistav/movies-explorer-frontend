@@ -16,10 +16,10 @@ function AboutMe() {
             а ещё увлекаюсь туризмом. Кодить начал со школы. С 2015 года работал в сфере Логистики.
             После того, как прошёл курс по веб-разработке, начал искать работу по профилю учебы</p>
             <div className="about-me__block-link">
-              <a href="https://www.facebook.com/smistav" className="main__subtitle about-me__link">
+              <a href="https://www.facebook.com/smistav" className="main__link main__subtitle about-me__link">
                 Facebook
             </a>
-              <a href="https://github.com/Smistav" className="main__subtitle about-me__link">
+              <a href="https://github.com/Smistav" className="main__link main__subtitle about-me__link">
                 Github
             </a>
             </div>

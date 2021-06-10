@@ -27,7 +27,6 @@
   display: flex;
   justify-content: space-between;
   color: #fff;
-  text-decoration: none;
 }
 .portfolio__title:last-child {
   border-bottom: 0;
@@ -43,5 +42,4 @@
   font-size: 30px;
   line-height: 60px;
   color: #fff;
-  text-decoration: none;
 }

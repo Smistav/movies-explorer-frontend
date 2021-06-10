@@ -10,13 +10,13 @@ function Footer() {
         <div className="main__body footer__body">
           <p className="main__subtitle"> © {year.toLocaleString("ru-Ru", { year: "numeric" })}</p>
           <nav className="footer__block-link">
-            <a href="https://praktikum.yandex.ru/" className="main__subtitle footer__link">
+            <a href="https://praktikum.yandex.ru/" className="main__link main__subtitle footer__link">
               Яндекс.Практикум
             </a>
-            <a href="https://github.com/Smistav" className="main__subtitle footer__link">
+            <a href="https://github.com/Smistav" className="main__link main__subtitle footer__link">
               Github
             </a>
-            <a href="https://www.facebook.com/smistav" className="main__subtitle footer__link">
+            <a href="https://www.facebook.com/smistav" className="main__link main__subtitle footer__link">
               Facebook
             </a>
           </nav>

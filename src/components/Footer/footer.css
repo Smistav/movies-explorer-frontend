@@ -1,11 +1,6 @@
 .footer {
   margin: 0 auto;
 }
-.footer__container {
-  max-width: 1140px;
-  margin-left: 70px;
-  margin-right: 70px;
-}
 .footer__header {
   height: 16px;
   margin: 79px 0 0 0;
@@ -25,7 +20,6 @@
 }
 .footer__link {
   margin-right: 20px;
-  text-decoration: none;
   color: #fff;
 }
 .footer__link:last-child {

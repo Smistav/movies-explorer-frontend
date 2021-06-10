@@ -9,16 +9,18 @@ function Portfolio() {
         <div className="main__body portfolio__body">
           <nav className="portfolio__block">
             <a href="https://smistav.github.io/how-to-learn/index.html"
-              className="main__title portfolio__title">Статичный сайт
-            <p className="portfolio__link">↗</p>
+              className="main__link main__title portfolio__title">Статичный сайт
+            <p className="main__link portfolio__link">↗</p>
             </a>
-            <a href="https://ya.ru" className="main__title portfolio__title">
+            <a href="https://smistav.github.io/russian-travel/index.html"
+              className="main__link main__title portfolio__title">
               Адаптивный сайт
-              <p className="portfolio__link">↗</p>
+              <p className="main__link portfolio__link">↗</p>
             </a>
-            <a href="https://ya.ru" className="main__title portfolio__title">
+            <a href="https://front15.smistav.nomoredomains.monster/"
+              className="main__link main__title portfolio__title">
               Одностраничное приложение
-              <p className="portfolio__link">↗</p>
+              <p className="main__link portfolio__link">↗</p>
             </a>
           </nav>
         </div>
