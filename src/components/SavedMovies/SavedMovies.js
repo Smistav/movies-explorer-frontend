@@ -10,7 +10,6 @@ function SavedMovies() {
       <div className="main__container">
         <SearchForm />
         <MoviesCardList />
-        {/* <Preloader /> */}
         <Devider />
       </div>
     </section>
