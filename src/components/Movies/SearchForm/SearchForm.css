@@ -23,6 +23,10 @@
   font-size: 13px;
   line-height: 17px;
   outline: none;
+  transition: 0.3s;
+}
+.form__input:hover {
+  background-color: #5a5959;
 }
 .form__button {
   width: 58px;
@@ -33,7 +37,6 @@
   border-radius: 48px;
   border: none;
   background-color: #4285f4;
-  cursor: pointer;
   font-style: normal;
   font-weight: 500;
   font-size: 11px;

@@ -46,6 +46,7 @@
 .main__link {
   text-decoration: none;
   cursor: pointer;
+  transition: 0.3s;
 }
 .main__link:hover {
   opacity: 0.6;
