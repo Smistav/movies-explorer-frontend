@@ -2,15 +2,14 @@ import React from 'react';
 import './MoviesCardList.css';
 import cards from '../../../utils/cards';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import CardList from '../../CardList/CardList';
 
 function MoviesCardList() {
   return (
-    <CardList className="movies-cards-list">
+    <section className="movies-card-list">
       {cards.map((item) => (
         <MoviesCard key={item._id} card={item} />
       ))}
-    </CardList>
+    </section>
   )
 }
 export default MoviesCardList
