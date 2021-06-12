@@ -4,7 +4,6 @@
   height: 281px;
   flex-direction: column;
   margin: 0;
-  height: auto;
   position: relative;
   background: #222222;
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
@@ -41,4 +40,16 @@
   font-size: 11px;
   line-height: 13px;
   color: #8b8b8b;
+}
+@media screen and (max-width: 892px) {
+  .card {
+    width: 339px;
+    height: 262px;
+  }
+  .card__img {
+    height: 190px;
+  }
+  .card__title {
+    width: 270px;
+  }
 }

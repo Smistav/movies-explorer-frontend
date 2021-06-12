@@ -1,5 +1,4 @@
 import React from 'react';
-import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import cards_saved from '../../../utils/cards_saved';
 
