@@ -21,11 +21,14 @@
 .main__body {
   display: flex;
   flex-direction: row;
-  height: 524px;
   justify-content: space-between;
 }
 .main__block {
   max-width: 550px;
+}
+.main__description {
+  display: flex;
+  flex-direction: column;
 }
 .main__title {
   margin: 0;
@@ -50,4 +53,10 @@
 }
 .main__link:hover {
   opacity: 0.6;
+}
+@media screen and (max-width: 768px) {
+  .main__container {
+    max-width: 708px;
+    margin: 0 30px;
+  }
 }

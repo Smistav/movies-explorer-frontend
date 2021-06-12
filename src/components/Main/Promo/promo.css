@@ -59,8 +59,41 @@
   background-color: #073042;
   border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 3px;
-  margin-top: 146px;
+  margin: 146px 0 25px 0;
 }
 .promo__footer {
   height: 50px;
+}
+@media screen and (max-width: 768px) {
+  .promo__img {
+    margin: 140px 0 0 0;
+  }
+  .promo__body {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .promo__title {
+    max-width: 680px;
+    margin-top: 48px;
+    font-size: 40px;
+    line-height: 50px;
+    text-align: center;
+  }
+  .promo__subtitle {
+    display: block;
+    max-width: 262px;
+    margin-top: 22px;
+    font-size: 13px;
+    line-height: 16px;
+    align-self: center;
+    text-align: center;
+    opacity: 0.5;
+  }
+  .promo__button {
+    margin: 92px 0 10px 0;
+    align-self: center;
+  }
+  .promo__footer {
+    height: 66px;
+  }
 }

@@ -2,7 +2,6 @@
   margin: 0;
 }
 .about-project__body {
-  height: 270px;
   justify-content: unset;
 }
 .about-project__block:first-child {
@@ -20,7 +19,7 @@
 }
 .about-project__footer {
   display: flex;
-  margin-bottom: 105px;
+  margin: 110px 0 105px 0;
   flex-direction: column;
 }
 .about-project__footer-row {
@@ -54,4 +53,26 @@
   background-color: #202020;
   font-weight: 500;
   color: #8b8b8b;
+}
+@media screen and (max-width: 768px) {
+  .about-project__container {
+    margin: 0 50px;
+  }
+  .about-project__header {
+    margin: 90px 0 0 0;
+  }
+  .about-project__subtitle {
+    padding-top: 22px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .about-project__block {
+    max-width: 319px;
+  }
+  .about-project__block:first-child {
+    margin-right: 30px;
+  }
+  .about-project__footer {
+    margin: 93px 0 121px 0;
+  }
 }

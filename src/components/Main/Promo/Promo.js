@@ -26,8 +26,8 @@ function Promo() {
           </Link>
           </div>
         </div>
-        <div className="main__body">
-          <div>
+        <div className="main__body promo__body">
+          <div className="main__description">
             <h1 className="main__title promo__title">Учебный проект студента факультета Веб-разработки.</h1>
             <p className="main__subtitle promo__subtitle">Листайте ниже, чтобы узнать больше про этот проект и его создателя.</p>
             <button onClick={handleClickMore} className="main__link promo__button">Узнать больше</button>

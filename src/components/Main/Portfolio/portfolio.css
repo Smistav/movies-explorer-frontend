@@ -10,12 +10,12 @@
   color: #8b8b8b;
 }
 .portfolio__body {
-  height: 355px;
 }
 
 .portfolio__block {
   max-width: 1140px;
   width: 100%;
+  margin-bottom: 125px;
 }
 
 .portfolio__title {
@@ -42,4 +42,18 @@
   font-size: 30px;
   line-height: 60px;
   color: #fff;
+}
+@media screen and (max-width: 768px) {
+  .portfolio__container {
+    margin: 0 50px;
+  }
+  .portfolio__title {
+    font-size: 28px;
+    line-height: 50px;
+  }
+  .portfolio__block {
+    max-width: 668px;
+    width: 100%;
+    margin-bottom: 90px;
+  }
 }

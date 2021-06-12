@@ -5,8 +5,8 @@ import aboutme_img from "../../../images/photo_me.jpeg"
 function AboutMe() {
   return (
     <section className="main about-me">
-      <div className="main__container">
-        <h2 className="main__header">Студент</h2>
+      <div className="main__container about-me__container">
+        <h2 className="main__header about-me__header">Студент</h2>
         <div className="main__body about-me__body">
           <div className="about-me__block">
             <h3 className="main__title about-me__title">Станислав</h3>
