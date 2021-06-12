@@ -29,3 +29,17 @@
   display: flex;
   align-items: center;
 }
+.menu__icon {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .menu__icon {
+    display: block;
+  }
+  .menu__link:not(:first-child) {
+    display: none;
+  }
+  .menu__block-link {
+    display: none;
+  }
+}
