@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import PopupForm from "../PopupForm/PopupForm";
 import './Profile.css';
 
 function Profile() {
@@ -8,27 +8,54 @@ function Profile() {
     email: "sol@url.ru"
   };
   return (
-    <section className="main profile">
-      <div className="main__container">
-        <h2 className="profile__title">Привет, {user.name}</h2>
-        <div className="profile__body">
-          <p className="profile__row">
-            <span>Имя</span>
-            <span>{user.name}</span>
-          </p>
-          <p className="profile__row">
-            <span>E-mail</span>
-            <span>{user.email}</span>
-          </p>
-        </div>
-        <div className="profile__body profile__footer">
-          <p className="main__link profile__link">Редактировать</p>
-          <Link className="main__link profile__link profile__link_signout" to="/">
-            Выйти из аккаунта
-          </Link>
-        </div>
+    <PopupForm
+      name="profile"
+      title={`Привет, ${user.name}`}
+      buttonName="Редактировать"
+      underButtonText=""
+      underButtonName="Выйти из аккаунта"
+      path="/"
+    >
+      <div className={`popup__input-container popup__input-container_form_profile`}>
+        <p className={`popup__input-header popup__input-header_form_profile`}>Имя</p>
+        <input
+          id="name-input"
+          name="name"
+          placeholder="Имя"
+          className={`popup__input popup__input_form_profile`}
+          type="text"
+          minLength="2"
+          maxLength="40"
+          autoComplete="off"
+          defaultValue={user.name}
+          required
+        />
+        <span id="name-input-error" className="popup__error">
+          {/* popup__error_visible */}
+          Что-то пошло не так...
+          </span>
       </div>
-    </section>
+      <div className="profile__input"></div>
+      <div className={`popup__input-container popup__input-container_form_profile`}>
+        <p className={`popup__input-header popup__input-header_form_profile`}>E-mail</p>
+        <input
+          id="email-input"
+          name="email"
+          placeholder="E-mail"
+          className={`popup__input popup__input_form_profile`}
+          type="email"
+          minLength="2"
+          maxLength="40"
+          autoComplete="off"
+          defaultValue={user.email}
+          required
+        />
+        <span id="email-input-error" className="popup__error">
+          {/* popup__error_visible */}
+          Что-то пошло не так...
+          </span>
+      </div>
+    </PopupForm>
   )
 }
 export default Profile

@@ -7,7 +7,7 @@ import './Register.css';
 function Register() {
   return (
     <>
-      <Link className="main__link login__link" to="/">
+      <Link className="main__link register__link" to="/">
         <Logo />
       </Link>
       <PopupForm
