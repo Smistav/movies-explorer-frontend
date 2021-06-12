@@ -29,11 +29,11 @@
   display: flex;
   align-items: center;
 }
-.menu__icon {
+.menu__icon-tablet {
   display: none;
 }
 @media screen and (max-width: 768px) {
-  .menu__icon {
+  .menu__icon-tablet {
     display: block;
   }
   .menu__link:not(:first-child) {
