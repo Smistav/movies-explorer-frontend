@@ -1,3 +1,6 @@
 .movies {
   margin: 0 auto;
 }
+.movies__container {
+  margin: 0 10px;
+}
