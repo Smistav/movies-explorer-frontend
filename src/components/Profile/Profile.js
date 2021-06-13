@@ -42,7 +42,7 @@ function Profile() {
           id="email-input"
           name="email"
           placeholder="E-mail"
-          className={`popup__input popup__input_form_profile`}
+          className={`popup__input popup__input_no-boder popup__input_form_profile`}
           type="email"
           minLength="2"
           maxLength="40"
