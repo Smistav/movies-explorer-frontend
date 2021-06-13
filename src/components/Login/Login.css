@@ -3,3 +3,11 @@
   display: flex;
   margin: 70px auto 0;
 }
+@media screen and (max-width: 768px) {
+  .login__link {
+    margin: 232px auto 0;
+  }
+  .popup__button_form_login {
+    margin-top: 197px;
+  }
+}

@@ -3,3 +3,14 @@
   display: flex;
   margin: 70px auto 0;
 }
+@media screen and (max-width: 768px) {
+  .register__link {
+    margin: 232px auto 0;
+  }
+  .popup__button_form_register {
+    margin-top: 128px;
+  }
+  .popup__block-link {
+    margin: 16px 0 232px 0;
+  }
+}

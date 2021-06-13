@@ -26,3 +26,11 @@
   text-align: center;
   color: #4285f4;
 }
+@media screen and (max-width: 768px) {
+  .page-not-found__title {
+    margin: 408px 0 0 0;
+  }
+  .page-not-found__link {
+    margin: 184px 0 222px 0;
+  }
+}
