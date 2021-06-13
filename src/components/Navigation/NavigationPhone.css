@@ -1,21 +1,21 @@
-.menu-tablet {
+.menu-phone {
   position: absolute;
   top: 0;
   right: 0;
-  height: 1024px;
-  width: 68%;
+  height: 780px;
+  width: 100%;
   display: none;
   background-color: #202020;
   flex-direction: column;
   align-items: center;
   z-index: 50;
-  padding-top: 159px;
+  padding-top: 144px;
   box-sizing: border-box;
 }
-.menu-tablet_visible {
+.menu-phone_visible {
   display: flex;
 }
-.menu-tablet:before {
+.menu-phone:before {
   content: '';
   position: absolute;
   width: 100vw;
@@ -23,43 +23,44 @@
   right: 100%;
   backdrop-filter: blur(2px);
 }
-.menu-tablet__block-link {
+.menu-phone__block-link {
   display: flex;
   max-width: 220px;
   width: 100%;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 621px;
+  margin-bottom: 421px;
 }
-.menu-tablet__link {
+.menu-phone__link {
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
   line-height: 22px;
   color: #fff;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
-.menu-tablet__link_active {
+.menu-phone__link_active {
   border-bottom: 2px solid #fff;
 }
-.menu-tablet__account-icon {
+.menu-phone__account-icon {
   margin-left: 7px;
 }
-.menu-tablet__link-image {
+.menu-phone__link-image {
   display: flex;
   align-items: center;
   font-weight: 500;
   font-size: 13px;
   line-height: 12px;
-  margin-bottom: 90px;
-}
-.menu-tablet__icon-close {
   position: absolute;
-  top: 20px;
-  right: 35px;
+  bottom: 46px;
 }
-@media screen and (min-width: 769px) and (max-width: 320px) {
-  .menu-tablet {
+.menu-phone__icon-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+}
+@media screen and (min-width: 321px) {
+  .menu-phone {
     display: none;
   }
 }
