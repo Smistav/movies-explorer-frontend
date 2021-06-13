@@ -8,7 +8,7 @@ function Footer() {
       <div className="main__container">
         <h4 className="main__header footer__header">Учебный проект Яндекс.Практикум х BeatFilm.</h4>
         <div className="main__body footer__body">
-          <p className="main__subtitle"> © {year.toLocaleString("ru-Ru", { year: "numeric" })}</p>
+          <p className="main__subtitle footer_subtitle"> © {year.toLocaleString("ru-Ru", { year: "numeric" })}</p>
           <nav className="footer__block-link">
             <a href="https://praktikum.yandex.ru/" className="main__link main__subtitle footer__link">
               Яндекс.Практикум
