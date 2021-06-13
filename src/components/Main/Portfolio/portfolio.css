@@ -47,6 +47,9 @@
   .portfolio__container {
     margin: 0 50px;
   }
+  .portfolio__header {
+    color: #a0a0a0;
+  }
   .portfolio__title {
     font-size: 28px;
     line-height: 50px;
@@ -55,5 +58,32 @@
     max-width: 668px;
     width: 100%;
     margin-bottom: 90px;
+  }
+}
+@media screen and (max-width: 390px) {
+  .portfolio__container {
+    margin: 0 30px;
+  }
+  .portfolio__title {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  .portfolio__link {
+    width: 18px;
+    height: 28px;
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .portfolio__container {
+    margin: 0 14px;
+  }
+  .portfolio__header {
+    margin: 0 0 40px 0;
+    font-size: 14px;
+  }
+  .portfolio__block {
+    margin-bottom: 70px;
   }
 }

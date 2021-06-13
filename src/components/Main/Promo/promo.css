@@ -87,7 +87,6 @@
     line-height: 16px;
     align-self: center;
     text-align: center;
-    opacity: 0.5;
   }
   .promo__button {
     margin: 92px 0 10px 0;
@@ -95,5 +94,37 @@
   }
   .promo__footer {
     height: 66px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .promo__sign-up {
+    font-size: 10px;
+    margin-right: 14px;
+  }
+  .promo__sign-in {
+    width: 54px;
+    height: 26px;
+  }
+  .promo__img {
+    width: 210px;
+    height: 206px;
+    margin: 70px 0 0 0;
+  }
+  .promo__title {
+    max-width: 300px;
+    margin-top: 44px;
+    font-size: 30px;
+    line-height: 38px;
+  }
+  .promo__subtitle {
+    max-width: 260px;
+    margin-top: 24px;
+  }
+  .promo__button {
+    margin: 80px 0 30px 0;
+    align-self: center;
+  }
+  .promo__footer {
+    display: none;
   }
 }

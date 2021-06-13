@@ -10,11 +10,11 @@ function AboutMe() {
         <div className="main__body about-me__body">
           <div className="about-me__block">
             <h3 className="main__title about-me__title">Станислав</h3>
-            <p className="main__subtitle about-me__subtitle">Фронтенд-разработчик, 43 года</p>
-            <p className="about-me__paragraph">Я родился и живу в Москве, закончил химико-технологический
-            факультет МГТУ и МВА-логистика ГУУ. У меня есть жена и 2 детей. Я люблю слушать музыку,
-            а ещё увлекаюсь туризмом. Кодить начал со школы. С 2015 года работал в сфере Логистики.
-            После того, как прошёл курс по веб-разработке, начал искать работу по профилю учебы</p>
+            <p className="main__subtitle about-me__subtitle">Фронтенд-разработчик, 43&nbsp;года</p>
+            <p className="about-me__paragraph">Я&nbsp;родился и&nbsp;живу в&nbsp;Москве, закончил химико-технологический
+            факультет МГТУ и&nbsp;МВА-логистика ГУУ. У&nbsp;меня есть жена и&nbsp;2&nbsp;детей. Я&nbsp;люблю слушать музыку,
+            а&nbsp;ещё увлекаюсь туризмом. Кодить начал со&nbsp;школы. С&nbsp;2015 года работал в&nbsp;сфере Логистики.
+После того, как прошёл курс по&nbsp;веб-разработке, начал искать работу по&nbsp;профилю учебы</p>
             <div className="about-me__block-link">
               <a href="https://www.facebook.com/smistav" className="main__link main__subtitle about-me__link">
                 Facebook
