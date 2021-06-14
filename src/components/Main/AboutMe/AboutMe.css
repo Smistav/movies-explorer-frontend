@@ -37,10 +37,11 @@
   color: #fff;
 }
 .about-me__img {
-  max-width: 270px;
-  max-height: 327px;
+  width: 270px;
+  height: 327px;
   margin: 66px 0 0 40px;
   border-radius: 10px;
+  object-fit: cover;
 }
 @media screen and (max-width: 768px) {
   .about-me__container {
@@ -68,8 +69,8 @@
     line-height: 18px;
   }
   .about-me__img {
-    max-width: 255px;
-    max-height: 307px;
+    width: 255px;
+    height: 307px;
     margin: 66px 0 0 49px;
   }
   .about-me__block-link {
@@ -81,8 +82,8 @@
     flex-wrap: wrap-reverse;
   }
   .about-me__img {
-    max-width: 292px;
-    max-height: 352px;
+    width: 292px;
+    height: 352px;
     margin: 60px 0 0 0;
   }
 }
