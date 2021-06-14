@@ -8,3 +8,9 @@
     margin: 232px auto 0;
   }
 }
+@media screen and (max-width: 400px) {
+  .register__link {
+    width: 38px;
+    margin: 56px auto 0;
+  }
+}
