@@ -29,6 +29,10 @@
 .form__input:hover {
   background-color: #5a5959;
 }
+.form__input:focus {
+  background-color: #5a5959;
+  border: 1px solid rgb(182, 181, 181);
+}
 .form__button {
   width: 58px;
   height: 34px;
