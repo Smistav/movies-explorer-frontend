@@ -1,0 +1,16 @@
+.login__link {
+  width: 396px;
+  display: flex;
+  margin: 70px auto 0;
+}
+@media screen and (max-width: 768px) {
+  .login__link {
+    margin: 232px auto 0;
+  }
+}
+@media screen and (max-width: 400px) {
+  .login__link {
+    width: 38px;
+    margin: 56px auto 0;
+  }
+}

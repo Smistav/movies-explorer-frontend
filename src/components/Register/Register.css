@@ -1,0 +1,16 @@
+.register__link {
+  width: 396px;
+  display: flex;
+  margin: 70px auto 0;
+}
+@media screen and (max-width: 768px) {
+  .register__link {
+    margin: 232px auto 0;
+  }
+}
+@media screen and (max-width: 400px) {
+  .register__link {
+    width: 38px;
+    margin: 56px auto 0;
+  }
+}

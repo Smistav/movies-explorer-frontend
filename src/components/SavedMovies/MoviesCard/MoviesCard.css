@@ -1,0 +1,15 @@
+.movies-card__remove {
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: #222222;
+  border: none;
+  display: block;
+  margin: 9px 16px 0 0;
+  padding: 0;
+}
+.movies-card__remove_active {
+  background-image: url('../../../images/remove_icon.svg');
+  background-repeat: no-repeat;
+}

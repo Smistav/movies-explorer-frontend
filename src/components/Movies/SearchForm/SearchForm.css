@@ -1,0 +1,111 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 237px;
+  border-bottom: 1px solid #424242;
+  margin: 0 4px;
+}
+.form__container {
+  position: relative;
+  height: 46px;
+  margin-top: 60px;
+}
+.form__input {
+  display: block;
+  width: 100%;
+  padding: 14px 0 14px 22px;
+  background-color: #2f2f2f;
+  border-radius: 40px;
+  border: none;
+  box-sizing: border-box;
+  color: #fff;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 17px;
+  outline: none;
+  transition: 0.3s;
+}
+.form__input:hover {
+  background-color: #5a5959;
+}
+.form__input:focus {
+  background-color: #5a5959;
+  border: 1px solid rgb(182, 181, 181);
+}
+.form__button {
+  width: 58px;
+  height: 34px;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  border-radius: 48px;
+  border: none;
+  background-color: #4285f4;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 18px;
+  color: #fff;
+}
+
+.form__slider {
+  display: none;
+}
+
+.form__slider + label {
+  position: relative;
+  display: block;
+  margin: 41px auto 0;
+  padding-left: 47px;
+  cursor: pointer;
+}
+
+.form__slider + label:after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 34px;
+  height: 14px;
+  background: #ee3465;
+  border-radius: 20px;
+  border: none;
+  box-shadow: inset 0 0 7px #666;
+  transition-delay: 100ms;
+  transition: background 100ms linear;
+}
+
+.form__slider:checked + label:after {
+  background: #3ddc84;
+}
+
+.form__slider + label:before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  background: #fff;
+  z-index: 1;
+  transition: left 100ms ease-in-out;
+}
+
+.form__slider:checked + label:before {
+  left: 22px;
+}
+@media screen and (max-width: 768px) {
+  .form__container {
+    margin-top: 80px;
+  }
+  .form__slider + label {
+    margin: 42px auto 0;
+  }
+}
+@media screen and (max-width: 320px) {
+  .form__slider + label {
+    margin: 43px auto 0;
+  }
+}

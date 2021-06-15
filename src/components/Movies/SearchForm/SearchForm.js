@@ -1,0 +1,17 @@
+import React from "react";
+import './SearchForm.css';
+
+function SearchForm() {
+  return (
+    <div className="form">
+      <form className="form__container" noValidate>
+        <input id="name-film" name="name" className="form__input" type="text"
+          placeholder="Фильм" required />
+        <button type="submit" name="button" className="main__link form__button">Найти</button>
+      </form>
+      <input type="checkbox" className="form__slider" name="slider" id="slider" />
+      <label className="main__link" htmlFor="slider">Короткометражки</label>
+    </div>
+  )
+}
+export default SearchForm
