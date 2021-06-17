@@ -1,13 +1,14 @@
 import React from 'react';
+import '../../Movies/MoviesCardList/MoviesCardList';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import cards_saved from '../../../utils/cards_saved';
 
-function MoviesCardList() {
+function MoviesCardList({ savedCards }) {
   return (
     <section className="movies-card-list">
-      {cards_saved.map((item) => (
-        <MoviesCard key={item._id} card={item} />
-      ))}
+      { savedCards &&
+        savedCards.map((item) => (
+          <MoviesCard key={item.id} card={item} />
+        ))}
     </section>
   )
 }

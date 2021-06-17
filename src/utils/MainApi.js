@@ -1,4 +1,4 @@
-import URL_MAIN_API from './constants';
+import { URL_MAIN_API } from './constants';
 
 class Api {
   constructor(options) {
@@ -13,30 +13,27 @@ class Api {
   // Методы Карточек Фильмов
 
   getMovieCards(jwt) {
-    return fetch(`${this._baseUrl}/movies`, {
+    return fetch(this._baseUrl + '/movies', {
       headers: {
         'Content-Type': 'application/json',
-        'authorization': `Bearer ${jwt}`
+        // 'authorization': `Bearer ${jwt}`
       }
     }).then(
       this._checkResponse
     );
   }
-  addNewCard({ name, link }, jwt) {// Добавить поля или передать объект полностью посмотреть
+  addNewCard(movieCard, jwt) {// Добавить поля или передать объект полностью посмотреть
     return fetch(`${this._baseUrl}/movies`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
         'authorization': `Bearer ${jwt}`
       },
-      body: JSON.stringify({
-        name,
-        link,
-      }),
+      body: JSON.stringify(movieCard),
     }).then(this._checkResponse);
   }
-  changeLikeCardStatus({ name, link }, id, isLike, jwt) {
-    return isLike ? this.addNewCard({ name, link }, jwt) : this.deleteCard(id, jwt)
+  changeLikeCardStatus({ ...fields }, id, isLike, jwt) {
+    return isLike ? this.addNewCard({ ...fields }, jwt) : this.deleteCard(id, jwt)
   }
   deleteCard(id, jwt) {
     return fetch(`${this._baseUrl}/movies/${id}`, {
@@ -53,7 +50,7 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: {
         'Content-Type': 'application/json',
-        'authorization': `Bearer ${jwt}`
+        // 'authorization': `Bearer ${jwt}`
       }
     }).then(
       this._checkResponse

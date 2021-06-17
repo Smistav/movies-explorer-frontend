@@ -1,4 +1,4 @@
-import URL_MOVIES_API from './constants';
+import { URL_MOVIES_API } from './constants';
 
 class MoviesApi {
   constructor(options) {
@@ -13,13 +13,14 @@ class MoviesApi {
   // Метод Карточек Фильмов
 
   getMovieCards() {
-    return fetch(`${this._baseUrl}/movies`, {
+    return fetch(this._baseUrl, {
       headers: {
         'Content-Type': 'application/json',
       }
     }).then(
       this._checkResponse
     );
+
   }
 }
 const moviesApi = new MoviesApi({

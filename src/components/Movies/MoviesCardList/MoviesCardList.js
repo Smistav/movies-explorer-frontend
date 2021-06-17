@@ -1,13 +1,12 @@
 import React from 'react';
 import './MoviesCardList.css';
-import cards from '../../../utils/cards';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList() {
+function MoviesCardList({ cards, countCards }) {
   return (
     <section className="movies-card-list">
-      {cards.map((item) => (
-        <MoviesCard key={item._id} card={item} />
+      {cards.slice(0, countCards).map((item) => (
+        <MoviesCard key={item.id} card={item} />
       ))}
     </section>
   )
