@@ -14,12 +14,13 @@ import moviesApi from "../../utils/MoviesApi";
 import './App.css';
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({ name: "", email: "" });
-  const [cards, setCards] = useState([]);
-  const [savedCards, setSavedCards] = useState([]);
-  const [filteredCards, setFilteredCards] = useState();
-  const [loading, setLoading] = useState(false);
-
+  const [currentUser, setCurrentUser] = useState({ name: "", email: "" }); // данные пользователя
+  const [cards, setCards] = useState([]); // Все карточки MovieApi
+  const [savedCards, setSavedCards] = useState([]); // карточки пользователя
+  const [filteredCards, setFilteredCards] = useState(); // поиск пользователя
+  const [loading, setLoading] = useState(false); // состояние Прелоадера
+  const [errorQuery, setErrorQuery] = useState(false); //Состояние связи с сервером MovieApi
+  const [emptyQuery, setEmptyQuery] = useState(false); // Состояние пустого запроса
 
   // useEffect(() => {
   //   // if (isLogged){
@@ -36,6 +37,7 @@ function App() {
   // Если нет берем из LS
   useEffect(() => {
     if (!localStorage.getItem("cards")) {
+      setErrorQuery(false);
       setLoading(true);
       moviesApi
         .getMovieCards(localStorage.getItem("jwt"))
@@ -44,7 +46,10 @@ function App() {
           localStorage.setItem("cards", JSON.stringify(cards));
           setLoading(false);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setLoading(false);
+          setErrorQuery(true);
+        });
     } else {
       localStorage.getItem("cards") && setCards(JSON.parse(localStorage.getItem("cards")));
     }
@@ -57,13 +62,20 @@ function App() {
   }, []);
 
   function handleQuerySubmit(query) {
-    const filteredCards = cards
+    setEmptyQuery(false);
+    setLoading(true);
+    let filteredCards = cards
       .filter((card) => card.nameRU
         .toLowerCase()
-        .includes(query.name))
+        .includes(query.name.toLowerCase()))
     setFilteredCards(filteredCards);
-    if (filteredCards) {
+    if (filteredCards.length !== 0) {
       localStorage.setItem("filtered-cards", JSON.stringify(filteredCards));
+      setLoading(false);
+    } else {
+      setEmptyQuery(true);
+      localStorage.removeItem("filtered-cards");
+      setLoading(false);
     }
   }
 
@@ -89,6 +101,8 @@ function App() {
           <Movies
             onSubmit={handleQuerySubmit}
             loading={loading}
+            errorQuery={errorQuery}
+            emptyQuery={emptyQuery}
             filteredCards={filteredCards}
           />
           <Footer />

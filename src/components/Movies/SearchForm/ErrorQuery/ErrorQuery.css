@@ -1,0 +1,17 @@
+.error-query {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  padding: 20px;
+}
+.error-query__container {
+  width: 600px;
+  position: relative;
+  text-align: center;
+}
+.error-query__round {
+  margin: 0;
+}
