@@ -2,9 +2,10 @@ import React from 'react';
 import './Card.css';
 
 function Card({ card, onRemove, offRemove, children }) {
-  const time = ~~(card.duration / 60) + 'ч ' + (card.duration % 60) + 'м';
+  const hour = ~~(card.duration / 60);
+  const minute = (card.duration % 60);
+  const time = `${hour === 0 ? "" : hour + 'ч '}${minute === 0 ? "" : minute + 'м'}`;
   return (
-    // { && (
     <figure onMouseOver={onRemove} onMouseOut={offRemove} className="card main__link">
       <img src={`https://api.nomoreparties.co${card.image.url}`} alt={card.nameRU} className="card__img" />
       <figcaption className="card__description">
@@ -13,7 +14,6 @@ function Card({ card, onRemove, offRemove, children }) {
         <p className="card__time">{time}</p>
       </figcaption>
     </figure>
-    // )}
   )
 }
 export default Card
