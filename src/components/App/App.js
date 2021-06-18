@@ -35,7 +35,7 @@ function App() {
   // В начале загрузки 
   // Если LS пустой подключаем moviesApi
   // Если нет берем из LS
-  useEffect(() => {
+  function initCards() {
     if (!localStorage.getItem("cards")) {
       setErrorQuery(false);
       setLoading(true);
@@ -53,7 +53,8 @@ function App() {
     } else {
       localStorage.getItem("cards") && setCards(JSON.parse(localStorage.getItem("cards")));
     }
-  }, []);
+    return JSON.parse(localStorage.getItem("cards"))
+  }
   // В начале загрузки
   // Проверяем в LS filtered-cards если пользователь вернулся(не забыть удалять после logout)
   useEffect(() => {
@@ -64,7 +65,7 @@ function App() {
   function handleQuerySubmit(query) {
     setEmptyQuery(false);
     setLoading(true);
-    let filteredCards = cards
+    let filteredCards = initCards()
       .filter((card) => card.nameRU
         .toLowerCase()
         .includes(query.name.toLowerCase()))
