@@ -34,7 +34,6 @@ function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQue
     }
   }
   useEffect(() => {
-    setCountCard();
     window.addEventListener("resize", setCountCard);
   }, []);
   const filteredCardListLength = filteredCards.length;

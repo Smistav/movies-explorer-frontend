@@ -32,97 +32,34 @@ function App() {
   //   // }
   // }, []);
 
-
-  // В начале загрузки 
-  // Если LS пустой подключаем moviesApi
-  // Если нет берем из LS
-  function initCards() {
-    // let convertCards = [];
-    // function convertCard(card) {
-    //   const {
-    //     country,
-    //     director,
-    //     duration,
-    //     year,
-    //     description,
-    //     image_select: image = URL_SERVER_MOVIES_API + card.image.url,
-    //     trailer = card.trailerLink,
-    //     thumbnail = URL_SERVER_MOVIES_API + card.image.formats.thumbnail.url,
-    //     nameEN,
-    //     nameRU,
-    //     id,
-    //   } = card;
-    //   return {
-    //     country,
-    //     director,
-    //     duration,
-    //     year,
-    //     description,
-    //     image,
-    //     trailer,
-    //     thumbnail,
-    //     nameEN,
-    //     nameRU,
-    //     id
-    //   }
-    // }
-    if (!localStorage.getItem("cards")) {
-      setErrorQuery(false);
-      setLoading(true);
-      moviesApi
-        .getMovieCards()
-        .then((cards) => {
-          // convertCards = cards.map(card => convertCard(card));
-          setCards(cards);//convertCards
-          localStorage.setItem("cards", JSON.stringify(cards));//convertCards
-          setLoading(false);
-          return cards
-          // return convertCards;
-        })
-        .catch((err) => {
-          setLoading(false);
-          setErrorQuery(true);
-        });
-    } else {
-      localStorage.getItem("cards") && setCards(JSON.parse(localStorage.getItem("cards")));
-    }
-
-  }
-  // В начале загрузки
-  // Проверяем в LS filtered-cards если пользователь вернулся(не забыть удалять после logout)
+  // Получаем сохраненные пользователем карточки
+  useEffect(() => {
+    mainApi
+      .getMovieCards(localStorage.getItem("jwt"))
+      .then((savedCards) => {
+        setSavedCards(savedCards);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  // В начале gроверяем в LS filtered-cards если пользователь вернулся(не забыть удалять после logout)
   useEffect(() => {
     localStorage.getItem("filtered-cards") && setFilteredCards(
       JSON.parse(localStorage.getItem("filtered-cards")));
   }, []);
-  // useEffect(() => {
-  //   setFilteredCards(filteredCards)
-  // }, [filteredCards]);
+
+  // В начале загрузки 
+  // Если LS пустой подключаем moviesApi
+  // Если нет берем из LS
+  // Конвертируем карточки под формат бэкенда
   function convertCard(card) {
-    const {
-      country,
-      director,
-      duration,
-      year,
-      description,
+    const { country, director, duration, year, description,
       image_select: image = URL_SERVER_MOVIES_API + card.image.url,
       trailer = card.trailerLink,
       thumbnail = URL_SERVER_MOVIES_API + card.image.formats.thumbnail.url,
-      nameEN,
-      nameRU,
-      id,
-    } = card;
+      nameEN, nameRU, id } = card;
     return {
-      country,
-      director,
-      duration,
-      year,
-      description,
-      image,
-      trailer,
-      thumbnail,
-      nameEN,
-      nameRU,
-      id
+      country, director, duration, year, description, image, trailer, thumbnail,
+      nameEN, nameRU, id
     }
   }
   function filteredQuery(query, cards) {
@@ -153,8 +90,8 @@ function App() {
         .getMovieCards()
         .then((cards) => {
           convertCards = cards.map(card => convertCard(card));
-          setCards(convertCards);//convertCards
-          localStorage.setItem("cards", JSON.stringify(convertCards));//convertCards
+          setCards(convertCards);
+          localStorage.setItem("cards", JSON.stringify(convertCards));
           setLoading(false);
           filteredQuery(query, convertCards)
         })
@@ -168,53 +105,23 @@ function App() {
       filteredQuery(query, cards);
     }
   }
+
   function handleCardLike(card) {
-    const {
-      country,
-      director,
-      duration,
-      year,
-      description,
-      image_select: image = URL_SERVER_MOVIES_API + card.image.url,
-      trailer = card.trailerLink,
-      thumbnail = URL_SERVER_MOVIES_API + card.image.formats.thumbnail.url,
-      nameEN,
-      nameRU,
-      id: movieId,
-    } = card
-    // setLoading(true);
+    const { country, director, duration, year, description, image, trailer, thumbnail,
+      nameEN, nameRU, id: movieId } = card
     mainApi
       .setLikeCard({
-        country,
-        director,
-        duration,
-        year,
-        description,
-        image,
-        trailer,
-        thumbnail,
-        nameEN,
-        nameRU,
-        movieId
-      }
-        , localStorage.getItem("jwt"))
-      .then((newCard) => {
-        //setFilteredCards((state) => state.map((c) => (c.movieId === card.id ? newCard : c)));
-        // setLoading(false);
+        country, director, duration, year, description, image, trailer, thumbnail,
+        nameEN, nameRU, movieId
+      }, localStorage.getItem("jwt"))
+      .then((likeCard) => {
+        setFilteredCards((state) => state.map((c) => (c.id === card.id ? card : c)));
+        setSavedCards([...savedCards, likeCard]);
       })
       .catch((err) => {
         console.log(err);
       });
   }
-  useEffect(() => {
-    mainApi
-      .getMovieCards(localStorage.getItem("jwt"))
-      .then((savedCards) => {
-        setSavedCards(savedCards);
-      })
-      .catch((err) => console.log(err));
-  }
-    , []);
 
   return (
     <div className="app">

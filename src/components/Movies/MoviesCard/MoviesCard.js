@@ -6,7 +6,6 @@ function MoviesCard({ card, savedCards, onCardLike }) {
   const isLiked = savedCards.some((savedCard) => savedCard.movieId === card.id)
 
   function handleLikeClick() {
-    console.log(isLiked, card.id, savedCards)
     onCardLike(card);
   }
   return (
