@@ -12,6 +12,7 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 import './App.css';
+import { URL_SERVER_MOVIES_API } from "../../utils/constants";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({ name: "", email: "" }); // данные пользователя
@@ -21,7 +22,7 @@ function App() {
   const [loading, setLoading] = useState(false); // состояние Прелоадера
   const [errorQuery, setErrorQuery] = useState(false); //Состояние связи с сервером MovieApi
   const [emptyQuery, setEmptyQuery] = useState(false); // Состояние пустого запроса
-
+  const [emptyResult, setEmptyResult] = useState(false); // Состояние пустого результата
   // useEffect(() => {
   //   // if (isLogged){
   //   mainApi
@@ -36,15 +37,47 @@ function App() {
   // Если LS пустой подключаем moviesApi
   // Если нет берем из LS
   function initCards() {
+    // let convertCards = [];
+    // function convertCard(card) {
+    //   const {
+    //     country,
+    //     director,
+    //     duration,
+    //     year,
+    //     description,
+    //     image_select: image = URL_SERVER_MOVIES_API + card.image.url,
+    //     trailer = card.trailerLink,
+    //     thumbnail = URL_SERVER_MOVIES_API + card.image.formats.thumbnail.url,
+    //     nameEN,
+    //     nameRU,
+    //     id,
+    //   } = card;
+    //   return {
+    //     country,
+    //     director,
+    //     duration,
+    //     year,
+    //     description,
+    //     image,
+    //     trailer,
+    //     thumbnail,
+    //     nameEN,
+    //     nameRU,
+    //     id
+    //   }
+    // }
     if (!localStorage.getItem("cards")) {
       setErrorQuery(false);
       setLoading(true);
       moviesApi
-        .getMovieCards(localStorage.getItem("jwt"))
+        .getMovieCards()
         .then((cards) => {
-          setCards(cards);
-          localStorage.setItem("cards", JSON.stringify(cards));
+          // convertCards = cards.map(card => convertCard(card));
+          setCards(cards);//convertCards
+          localStorage.setItem("cards", JSON.stringify(cards));//convertCards
           setLoading(false);
+          return cards
+          // return convertCards;
         })
         .catch((err) => {
           setLoading(false);
@@ -53,7 +86,7 @@ function App() {
     } else {
       localStorage.getItem("cards") && setCards(JSON.parse(localStorage.getItem("cards")));
     }
-    return JSON.parse(localStorage.getItem("cards"))
+
   }
   // В начале загрузки
   // Проверяем в LS filtered-cards если пользователь вернулся(не забыть удалять после logout)
@@ -61,34 +94,127 @@ function App() {
     localStorage.getItem("filtered-cards") && setFilteredCards(
       JSON.parse(localStorage.getItem("filtered-cards")));
   }, []);
-
-  function handleQuerySubmit(query) {
-    setEmptyQuery(false);
-    setLoading(true);
-    let filteredCards = initCards()
-      .filter((card) => card.nameRU
-        .toLowerCase()
-        .includes(query.name.toLowerCase()))
-    setFilteredCards(filteredCards);
-    if (filteredCards.length !== 0) {
-      localStorage.setItem("filtered-cards", JSON.stringify(filteredCards));
-      setLoading(false);
-    } else {
-      setEmptyQuery(true);
-      localStorage.removeItem("filtered-cards");
-      setLoading(false);
+  // useEffect(() => {
+  //   setFilteredCards(filteredCards)
+  // }, [filteredCards]);
+  function convertCard(card) {
+    const {
+      country,
+      director,
+      duration,
+      year,
+      description,
+      image_select: image = URL_SERVER_MOVIES_API + card.image.url,
+      trailer = card.trailerLink,
+      thumbnail = URL_SERVER_MOVIES_API + card.image.formats.thumbnail.url,
+      nameEN,
+      nameRU,
+      id,
+    } = card;
+    return {
+      country,
+      director,
+      duration,
+      year,
+      description,
+      image,
+      trailer,
+      thumbnail,
+      nameEN,
+      nameRU,
+      id
     }
   }
-
-  // useEffect(() => {
-  //   mainApi
-  //     .getMovieCards(localStorage.getItem("jwt"))
-  //     .then((savedCards) => {
-  //       setSavedCards(savedCards);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }
-  //   , []);
+  function filteredQuery(query, cards) {
+    let filteredCards;
+    if (query.name === '' || query.name === undefined) {
+      setEmptyQuery(true);
+      setFilteredCards([]);
+    } else {
+      filteredCards = cards.filter((card) => card.nameRU
+        .toLowerCase().includes(query.name.toLowerCase()));
+      setFilteredCards(filteredCards);
+      if (filteredCards.length !== 0) {
+        localStorage.setItem("filtered-cards", JSON.stringify(filteredCards));
+      } else {
+        setEmptyResult(true);
+        localStorage.removeItem("filtered-cards");
+      }
+    }
+  }
+  function handleQuerySubmit(query) {
+    let convertCards;
+    setEmptyQuery(false);
+    setEmptyResult(false);
+    setLoading(true);
+    if (!localStorage.getItem("cards")) {
+      setLoading(true);
+      moviesApi
+        .getMovieCards()
+        .then((cards) => {
+          convertCards = cards.map(card => convertCard(card));
+          setCards(convertCards);//convertCards
+          localStorage.setItem("cards", JSON.stringify(convertCards));//convertCards
+          setLoading(false);
+          filteredQuery(query, convertCards)
+        })
+        .catch((err) => {
+          setLoading(false);
+          setErrorQuery(true);
+        });
+    } else {
+      setCards(JSON.parse(localStorage.getItem("cards")));
+      setLoading(false);
+      filteredQuery(query, cards);
+    }
+  }
+  function handleCardLike(card) {
+    const {
+      country,
+      director,
+      duration,
+      year,
+      description,
+      image_select: image = URL_SERVER_MOVIES_API + card.image.url,
+      trailer = card.trailerLink,
+      thumbnail = URL_SERVER_MOVIES_API + card.image.formats.thumbnail.url,
+      nameEN,
+      nameRU,
+      id: movieId,
+    } = card
+    // setLoading(true);
+    mainApi
+      .setLikeCard({
+        country,
+        director,
+        duration,
+        year,
+        description,
+        image,
+        trailer,
+        thumbnail,
+        nameEN,
+        nameRU,
+        movieId
+      }
+        , localStorage.getItem("jwt"))
+      .then((newCard) => {
+        //setFilteredCards((state) => state.map((c) => (c.movieId === card.id ? newCard : c)));
+        // setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  useEffect(() => {
+    mainApi
+      .getMovieCards(localStorage.getItem("jwt"))
+      .then((savedCards) => {
+        setSavedCards(savedCards);
+      })
+      .catch((err) => console.log(err));
+  }
+    , []);
 
   return (
     <div className="app">
@@ -104,7 +230,10 @@ function App() {
             loading={loading}
             errorQuery={errorQuery}
             emptyQuery={emptyQuery}
+            emptyResult={emptyResult}
             filteredCards={filteredCards}
+            savedCards={savedCards}
+            onCardLike={handleCardLike}
           />
           <Footer />
         </Route>

@@ -7,7 +7,7 @@ function MoviesCardList({ savedCards }) {
     <section className="movies-card-list">
       { savedCards &&
         savedCards.map((item) => (
-          <MoviesCard key={item.id} card={item} />
+          <MoviesCard key={item.movieId} card={item} />
         ))}
     </section>
   )

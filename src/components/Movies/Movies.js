@@ -7,10 +7,10 @@ import ErrorQuery from './SearchForm/ErrorQuery/ErrorQuery'
 import More from "./More/More";
 import {
   ADD_CARDS_1280, ADD_CARDS_768_320, INIT_CARDS_1280, INIT_CARDS_768,
-  INIT_CARDS_320, ERROR_QUERY, EMPTY_QUERY
+  INIT_CARDS_320, ERROR_QUERY, EMPTY_QUERY, EMPTY_RESULT
 } from '../../utils/constants';
 
-function Movies({ filteredCards = "", loading, errorQuery, emptyQuery, onSubmit }) {
+function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQuery, onSubmit, onCardLike, savedCards }) {
   function setCountCard(str) {
     let initCountCards = 0;
     let addCountCards = 0;
@@ -54,7 +54,13 @@ function Movies({ filteredCards = "", loading, errorQuery, emptyQuery, onSubmit 
         {loading && (<Preloader />)}
         {errorQuery && (<ErrorQuery errorName={ERROR_QUERY} />)}
         {emptyQuery && (<ErrorQuery errorName={EMPTY_QUERY} />)}
-        {filteredCards.length ? (<MoviesCardList countCards={countCards} cards={filteredCards} />) : ""}
+        {emptyResult && (<ErrorQuery errorName={EMPTY_RESULT} />)}
+        {filteredCards.length ? (<MoviesCardList
+          countCards={countCards}
+          onCardLike={onCardLike}
+          savedCards={savedCards}
+          cards={filteredCards}
+        />) : ""}
         {more && (<More onClick={handleClick} />)}
       </div>
     </section>

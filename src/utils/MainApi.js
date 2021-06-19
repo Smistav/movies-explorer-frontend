@@ -16,13 +16,13 @@ class Api {
     return fetch(this._baseUrl + '/movies', {
       headers: {
         'Content-Type': 'application/json',
-        // 'authorization': `Bearer ${jwt}`
+        'authorization': `Bearer ${jwt}`
       }
     }).then(
       this._checkResponse
     );
   }
-  addNewCard(movieCard, jwt) {// Добавить поля или передать объект полностью посмотреть
+  setLikeCard(movieCard, jwt) {// Добавить поля или передать объект полностью посмотреть
     return fetch(`${this._baseUrl}/movies`, {
       method: "POST",
       headers: {
@@ -32,9 +32,9 @@ class Api {
       body: JSON.stringify(movieCard),
     }).then(this._checkResponse);
   }
-  changeLikeCardStatus({ ...fields }, id, isLike, jwt) {
-    return isLike ? this.addNewCard({ ...fields }, jwt) : this.deleteCard(id, jwt)
-  }
+  // changeLikeCardStatus({ ...fields }, id, isLike, jwt) {
+  //   return isLike ? this.addNewCard({ ...fields }, jwt) : this.deleteCard(id, jwt)
+  // }
   deleteCard(id, jwt) {
     return fetch(`${this._baseUrl}/movies/${id}`, {
       method: "DELETE",

@@ -10,8 +10,6 @@ class MoviesApi {
     }
     return Promise.reject(`Ошибка ${res.status}`);
   }
-  // Метод Карточек Фильмов
-
   getMovieCards() {
     return fetch(this._baseUrl, {
       headers: {
