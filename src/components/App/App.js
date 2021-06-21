@@ -19,6 +19,7 @@ function App() {
   const [cards, setCards] = useState([]); // Все карточки MovieApi
   const [savedCards, setSavedCards] = useState([]); // карточки пользователя
   const [filteredCards, setFilteredCards] = useState(); // поиск пользователя
+  const [filteredSavedCards, setFilteredSavedCards] = useState([]);// поиск пользователя сохраненных карточек
   const [loading, setLoading] = useState(false); // состояние Прелоадера
   const [errorQuery, setErrorQuery] = useState(false); //Состояние связи с сервером MovieApi
   const [emptyQuery, setEmptyQuery] = useState(false); // Состояние пустого запроса
@@ -32,19 +33,17 @@ function App() {
   //   // }
   // }, []);
 
-  // Получаем сохраненные пользователем карточки
+  // Если пользователь уже делал поиск то моунтим cards и saved-cards из LS
   useEffect(() => {
-    mainApi
-      .getMovieCards(localStorage.getItem("jwt"))
-      .then((savedCards) => {
-        setSavedCards(savedCards);
-      })
-      .catch((err) => console.log(err));
+    localStorage.getItem("cards") && setCards(JSON.parse(localStorage.getItem("cards")));
+    localStorage.getItem("saved-cards") && setSavedCards(JSON.parse(localStorage.getItem("saved-cards")));
   }, []);
-  // В начале gроверяем в LS filtered-cards если пользователь вернулся(не забыть удалять после logout)
+  // В начале проверяем в LS filtered-cards если пользователь вернулся(не забыть удалять после logout)
   useEffect(() => {
     localStorage.getItem("filtered-cards") && setFilteredCards(
       JSON.parse(localStorage.getItem("filtered-cards")));
+    localStorage.getItem("filtered-saved-cards") && setFilteredSavedCards(
+      JSON.parse(localStorage.getItem("filtered-saved-cards")));
   }, []);
 
   // В начале загрузки 
@@ -62,22 +61,21 @@ function App() {
       nameEN, nameRU, id
     }
   }
-  function filteredQuery(query, cards) {
+  function filteredQuery(query, cards, lsName) {
     let filteredCards;
     if (query.name === '' || query.name === undefined) {
       setEmptyQuery(true);
-      setFilteredCards([]);
     } else {
       filteredCards = cards.filter((card) => card.nameRU
         .toLowerCase().includes(query.name.toLowerCase()));
-      setFilteredCards(filteredCards);
       if (filteredCards.length !== 0) {
-        localStorage.setItem("filtered-cards", JSON.stringify(filteredCards));
+        localStorage.setItem(lsName, JSON.stringify(filteredCards));
       } else {
         setEmptyResult(true);
-        localStorage.removeItem("filtered-cards");
+        localStorage.removeItem(lsName);
       }
     }
+    return filteredCards;
   }
   function handleQuerySubmit(query) {
     let convertCards;
@@ -93,7 +91,7 @@ function App() {
           setCards(convertCards);
           localStorage.setItem("cards", JSON.stringify(convertCards));
           setLoading(false);
-          filteredQuery(query, convertCards)
+          setFilteredCards(filteredQuery(query, convertCards, "filtered-cards"));
         })
         .catch((err) => {
           setLoading(false);
@@ -102,7 +100,31 @@ function App() {
     } else {
       setCards(JSON.parse(localStorage.getItem("cards")));
       setLoading(false);
-      filteredQuery(query, cards);
+      setFilteredCards(filteredQuery(query, cards, "filtered-cards"));
+    }
+  }
+  function handleQuerySubmitSaved(query) {
+    setEmptyQuery(false);
+    setEmptyResult(false);
+    setLoading(true);
+    if (!localStorage.getItem("saved-cards")) {
+      setLoading(true);
+      mainApi
+        .getMovieCards(localStorage.getItem("jwt"))
+        .then((cards) => {
+          setSavedCards(cards);
+          localStorage.setItem("saved-cards", JSON.stringify(cards));
+          setLoading(false);
+          setFilteredSavedCards(filteredQuery(query, cards, "filtered-saved-cards"));
+        })
+        .catch((err) => {
+          setLoading(false);
+          setErrorQuery(true);
+        });
+    } else {
+      setSavedCards(JSON.parse(localStorage.getItem("saved-cards")));
+      setLoading(false);
+      setFilteredSavedCards(filteredQuery(query, savedCards, "filtered-saved-cards"));
     }
   }
 
@@ -149,7 +171,15 @@ function App() {
         </Route>
         <Route path="/saved-movies">
           <Header />
-          <SavedMovies savedCards={savedCards} />
+          <SavedMovies
+            onSubmit={handleQuerySubmitSaved}
+            loading={loading}
+            errorQuery={errorQuery}
+            emptyQuery={emptyQuery}
+            emptyResult={emptyResult}
+            savedCards={savedCards}
+            filteredSavedCards={filteredSavedCards}
+          />
           <Footer />
         </Route>
         <Route path="/profile">
