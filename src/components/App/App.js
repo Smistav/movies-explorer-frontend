@@ -33,19 +33,39 @@ function App() {
   //   // }
   // }, []);
 
-  // Если пользователь уже делал поиск то моунтим cards и saved-cards из LS
+  // Если пользователь уже делал поиск то монтируем cards из LS
   useEffect(() => {
     localStorage.getItem("cards") && setCards(JSON.parse(localStorage.getItem("cards")));
-    localStorage.getItem("saved-cards") && setSavedCards(JSON.parse(localStorage.getItem("saved-cards")));
   }, []);
-  // В начале проверяем в LS filtered-cards если пользователь вернулся(не забыть удалять после logout)
+  // при заходе пользователя монтируем saved-cards либо из API либо из LS
+  useEffect(() => {
+    if (!localStorage.getItem("saved-cards")) {
+      setErrorQuery(false);
+      mainApi
+        .getMovieCards(localStorage.getItem("jwt"))
+        .then((cards) => {
+          setSavedCards(cards);
+          localStorage.setItem("saved-cards", JSON.stringify(cards));
+        })
+        .catch((err) => {
+          setErrorQuery(true);
+        });
+    } else {
+      setSavedCards(JSON.parse(localStorage.getItem("saved-cards")));
+    }
+  }, [])
+  // проверяем в LS filtered-cards и saved-filtered-cards при монтировании
+  // если пользователь вернулся(не забыть удалять после logout)
   useEffect(() => {
     localStorage.getItem("filtered-cards") && setFilteredCards(
       JSON.parse(localStorage.getItem("filtered-cards")));
     localStorage.getItem("filtered-saved-cards") && setFilteredSavedCards(
       JSON.parse(localStorage.getItem("filtered-saved-cards")));
   }, []);
-
+  // Отслеживаем по SavedCards данные в LS когда удаляем или добавляем карточку.
+  useEffect(() => {
+    localStorage.setItem("saved-cards", JSON.stringify(savedCards));
+  }, [savedCards]);
   // В начале загрузки 
   // Если LS пустой подключаем moviesApi
   // Если нет берем из LS
@@ -131,8 +151,10 @@ function App() {
   function handleCardLike(card) {
     const { country, director, duration, year, description, image, trailer, thumbnail,
       nameEN, nameRU, id: movieId } = card;
-    const isLiked = savedCards.some((savedCard) => savedCard.movieId === card.id);
-    const deleteCard = savedCards.find((savedCard) => savedCard.movieId === card.id) || '';
+    const isLiked = savedCards.some((savedCard) =>
+      savedCard.movieId === (card.id || card.movieId));
+    const deleteCard = savedCards.find((savedCard) =>
+      savedCard.movieId === (card.id || card.movieId)) || '';
     mainApi
       .changeLikeCardStatus({
         country, director, duration, year, description, image, trailer, thumbnail,
@@ -141,7 +163,7 @@ function App() {
       .then((likeCard) => {
         setFilteredCards((state) => state.map((c) => (c.id === card.id ? card : c)));
         !isLiked ? setSavedCards([...savedCards, likeCard]) :
-          setSavedCards((state) => state.filter((c) => c.movieId !== card.id));
+          setSavedCards((state) => state.filter((c) => c.movieId !== (card.id || card.movieId)));
       })
       .catch((err) => {
         console.log(err);
@@ -179,6 +201,7 @@ function App() {
             emptyResult={emptyResult}
             savedCards={savedCards}
             filteredSavedCards={filteredSavedCards}
+            onCardRemove={handleCardLike}
           />
           <Footer />
         </Route>
