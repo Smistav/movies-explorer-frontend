@@ -22,7 +22,7 @@ class Api {
       this._checkResponse
     );
   }
-  setLikeCard(movieCard, jwt) {// Добавить поля или передать объект полностью посмотреть
+  addCard(movieCard, jwt) {
     return fetch(`${this._baseUrl}/movies`, {
       method: "POST",
       headers: {
@@ -32,9 +32,9 @@ class Api {
       body: JSON.stringify(movieCard),
     }).then(this._checkResponse);
   }
-  // changeLikeCardStatus({ ...fields }, id, isLike, jwt) {
-  //   return isLike ? this.addNewCard({ ...fields }, jwt) : this.deleteCard(id, jwt)
-  // }
+  changeLikeCardStatus(movieCard, id, isLike, jwt) {
+    return isLike ? this.addCard(movieCard, jwt) : this.deleteCard(id, jwt)
+  }
   deleteCard(id, jwt) {
     return fetch(`${this._baseUrl}/movies/${id}`, {
       method: "DELETE",

@@ -108,15 +108,18 @@ function App() {
 
   function handleCardLike(card) {
     const { country, director, duration, year, description, image, trailer, thumbnail,
-      nameEN, nameRU, id: movieId } = card
+      nameEN, nameRU, id: movieId } = card;
+    const isLiked = savedCards.some((savedCard) => savedCard.movieId === card.id);
+    const deleteCard = savedCards.find((savedCard) => savedCard.movieId === card.id) || '';
     mainApi
-      .setLikeCard({
+      .changeLikeCardStatus({
         country, director, duration, year, description, image, trailer, thumbnail,
         nameEN, nameRU, movieId
-      }, localStorage.getItem("jwt"))
+      }, deleteCard._id, !isLiked, localStorage.getItem("jwt"))
       .then((likeCard) => {
         setFilteredCards((state) => state.map((c) => (c.id === card.id ? card : c)));
-        setSavedCards([...savedCards, likeCard]);
+        !isLiked ? setSavedCards([...savedCards, likeCard]) :
+          setSavedCards((state) => state.filter((c) => c.movieId !== card.id));
       })
       .catch((err) => {
         console.log(err);
