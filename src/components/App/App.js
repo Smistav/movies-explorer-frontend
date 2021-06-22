@@ -261,7 +261,7 @@ function App() {
           </Route>
           <Route path="/profile">
             <Header />
-            <Profile userInfo={currentUser} />
+            <Profile userInfo={currentUser} onLogout={handleLogout} />
           </Route>
           <Route path="/signin">
             <Login />

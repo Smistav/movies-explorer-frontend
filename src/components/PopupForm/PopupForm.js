@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import './PopupForm.css';
 
 function PopupForm({ name, title, buttonName, underButtonText,
-  underButtonName, path, children, validForm, Loading, onSubmit, errorResultApi }) {
+  underButtonName, path, children, validForm, Loading, onSubmit, onLogout, errorResultApi }) {
   return (
     <div>
       <form
@@ -30,7 +30,7 @@ function PopupForm({ name, title, buttonName, underButtonText,
 
         <div className={`popup__block-link popup__block-link_form_${name}`}>
           <p className={`popup__paragraph popup__paragraph_form_${name}`}>{underButtonText}</p>
-          <Link to={path} className={`main__link popup__link-bottom popup__link-bottom_form_${name}`}>
+          <Link onCick={onLogout} to={path} className={`main__link popup__link-bottom popup__link-bottom_form_${name}`}>
             {underButtonName}
           </Link>
         </div>

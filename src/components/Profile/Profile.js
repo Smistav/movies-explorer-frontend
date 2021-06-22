@@ -2,11 +2,14 @@ import React from "react";
 import PopupForm from "../PopupForm/PopupForm";
 import './Profile.css';
 
-function Profile() {
+function Profile({ onLogout }) {
   const user = {
     name: "Станислав",
     email: "sol@url.ru"
   };
+  function handleLogout() {
+    onLogout();
+  }
   return (
     <PopupForm
       name="profile"
@@ -15,6 +18,7 @@ function Profile() {
       underButtonText=""
       underButtonName="Выйти из аккаунта"
       path="/"
+      onLogout={handleLogout}
     >
       <div className={`popup__input-container popup__input-container_form_profile`}>
         <p className={`popup__input-header popup__input-header_form_profile`}>Имя</p>
