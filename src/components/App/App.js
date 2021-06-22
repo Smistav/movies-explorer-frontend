@@ -40,7 +40,12 @@ function App() {
         });
     }
   }, [logged]);
-
+  function resetLS() {
+    localStorage.removeItem("cards");
+    localStorage.removeItem("saved-cards");
+    localStorage.removeItem("filtered-cards");
+    localStorage.removeItem("filtered-saved-cards");
+  }
   // Если пользователь уже делал поиск то монтируем cards из LS
   useEffect(() => {
     localStorage.getItem("cards") && setCards(JSON.parse(localStorage.getItem("cards")));
@@ -200,6 +205,7 @@ function App() {
           localStorage.setItem("jwt", jwt.token);
           setLogged(true);
           setLoading(false);
+          resetLS();
           setCurrentUser(onLogin);
           history.push("/movies");
         } else {
@@ -211,7 +217,12 @@ function App() {
         console.log(err);
       });
   }
-
+  function handleLogout() {
+    setLogged(false);
+    setCurrentUser({ name: "", email: "" });
+    localStorage.removeItem("jwt");
+    history.push("/");
+  }
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
