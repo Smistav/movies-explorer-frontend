@@ -2,9 +2,25 @@ import React from "react";
 import PopupForm from '../PopupForm/PopupForm';
 import Logo from "../Logo/Logo";
 import { Link } from "react-router-dom";
+import useCustomForm from "../../hooks/useCustomForm";
 import './Register.css';
 
-function Register() {
+function Register({ onRegister, errorResultApi }) {
+  const initialValues = {
+    name: "",
+    email: "",
+    password: "",
+  };
+  const {
+    values,
+    errors,
+    validForm,
+    handleChange,
+    handleSubmit,
+  } = useCustomForm({
+    initialValues,
+    onSubmit: (values) => onRegister(values),
+  });
   return (
     <>
       <Link className="main__link register__link" to="/">
@@ -17,12 +33,17 @@ function Register() {
         underButtonText="Уже зарегистрированы?"
         underButtonName="Войти"
         path="/signin"
+        onSubmit={handleSubmit}
+        validForm={validForm}
+        errorResultApi={errorResultApi}
       >
         <div className="popup__input-container">
           <p className="popup__input-header">Имя</p>
           <input
             id="name-input"
             name="name"
+            value={values.name}
+            onChange={handleChange}
             placeholder="Имя"
             className="popup__input"
             type="text"
@@ -31,15 +52,23 @@ function Register() {
             autoComplete="off"
             required
           />
-          <span id="name-input-error" className="popup__error popup__error_visible">
-            Что-то пошло не так...
-          </span>
+          {errors.name && (
+            <span
+              id="name-input-error"
+              className={`popup__error ${errors.name ? "popup__error_visible" : ""
+                }`}
+            >
+              {errors.name}
+            </span>
+          )}
         </div>
         <div className="popup__input-container">
           <p className="popup__input-header">E-mail</p>
           <input
             id="email-input"
             name="email"
+            value={values.email}
+            onChange={handleChange}
             placeholder="Email"
             className="popup__input"
             type="email"
@@ -48,15 +77,23 @@ function Register() {
             autoComplete="off"
             required
           />
-          <span id="email-input-error" className="popup__error popup__error_visible">
-            Что-то пошло не так...
-          </span>
+          {errors.email && (
+            <span
+              id="email-input-error"
+              className={`popup__error ${errors.email ? "popup__error_visible" : ""
+                }`}
+            >
+              {errors.email}
+            </span>
+          )}
         </div>
         <div className="popup__input-container">
           <p className="popup__input-header">Пароль</p>
           <input
             id="password"
             name="password"
+            value={values.password}
+            onChange={handleChange}
             placeholder="Пароль"
             className="popup__input"
             type="password"
@@ -65,9 +102,15 @@ function Register() {
             autoComplete="off"
             required
           />
-          <span id="password-input-error" className="popup__error popup__error_visible">
-            Что-то пошло не так...
-          </span>
+          {errors.password && (
+            <span
+              id="password-input-error"
+              className={`popup__error ${errors.password ? "popup__error_visible" : ""
+                }`}
+            >
+              {errors.password}
+            </span>
+          )}
         </div>
       </PopupForm>
     </>

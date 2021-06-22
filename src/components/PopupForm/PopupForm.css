@@ -105,6 +105,14 @@
 .popup__button_form_login {
   margin-top: 192px;
 }
+.popup__button_form_login_disabled {
+  opacity: 0.2;
+  cursor: unset;
+}
+
+.popup__button_form_login_disabled:hover {
+  opacity: 0.2;
+}
 @media screen and (max-width: 768px) {
   .popup__button_form_login {
     margin-top: 197px;
@@ -132,6 +140,22 @@
 /* Component Register */
 .popup__button_form_register {
   margin-top: 122px;
+  position: relative;
+}
+.popup__button_form_register_disabled {
+  opacity: 0.2;
+  cursor: unset;
+}
+.popup__button_form_register_disabled:hover {
+  opacity: 0.2;
+}
+.popup__block-link_form_register {
+}
+.popup__error_form_register {
+  top: -25px;
+  width: 100%;
+  text-align: center;
+  cursor: unset;
 }
 @media screen and (max-width: 768px) {
   .popup__button_form_register {

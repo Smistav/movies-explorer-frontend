@@ -8,7 +8,7 @@ class Api {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Ошибка ${res.status}`);
+    return res.json().then(res => Promise.reject(res));
   }
   // Методы Карточек Фильмов
 
@@ -50,7 +50,7 @@ class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: {
         'Content-Type': 'application/json',
-        // 'authorization': `Bearer ${jwt}`
+        'authorization': `Bearer ${jwt}`
       }
     }).then(
       this._checkResponse
@@ -68,20 +68,16 @@ class Api {
   }
   // Методы sign
 
-  signin({ email, password }) {
-    return fetch(this._baseUrl, {
+  sign({ name, email, password }, path) {
+    const body = path === '/signin' ? JSON.stringify({ email, password })
+      : JSON.stringify({ name, email, password });
+    return fetch(`${this._baseUrl}${path}`, {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
+      body: body,
     }).then(this._checkResponse);
   }
-  signup({ name, email, password }) {
-    return fetch(this._baseUrl, {
-      method: "POST",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, password }),
-    }).then(this._checkResponse);
-  }
+
   checkToken(jwt) {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: {

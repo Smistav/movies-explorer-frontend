@@ -3,7 +3,7 @@ import './SavedMovies.css';
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import Devider from "./Devider/Devider";
-import Preloader from '../Movies/Preloader/Preloader';
+import Preloader from '../Preloader/Preloader';
 import ErrorQuery from '../Movies/SearchForm/ErrorQuery/ErrorQuery';
 import { ERROR_QUERY, EMPTY_QUERY, EMPTY_RESULT } from '../../utils/constants';
 

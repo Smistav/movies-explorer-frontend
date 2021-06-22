@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import Main from "../Main/Main";
 import Header from "../Header/Header";
 import Movies from "../Movies/Movies";
@@ -13,6 +13,7 @@ import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 import './App.css';
 import { URL_SERVER_MOVIES_API } from "../../utils/constants";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({ name: "", email: "" }); // данные пользователя
@@ -23,15 +24,22 @@ function App() {
   const [loading, setLoading] = useState(false); // состояние Прелоадера
   const [errorQuery, setErrorQuery] = useState(false); //Состояние связи с сервером MovieApi
   const [emptyQuery, setEmptyQuery] = useState(false); // Состояние пустого запроса
-  const [emptyResult, setEmptyResult] = useState(false); // Состояние пустого результата
-  // useEffect(() => {
-  //   // if (isLogged){
-  //   mainApi
-  //     .getUserInfo(localStorage.getItem("jwt"))
-  //     .then((userInfo) => setCurrentUser(userInfo))
-  //     .catch((err) => console.log(err));
-  //   // }
-  // }, []);
+  const [emptyResultQuery, setEmptyResultQuery] = useState(false); // Состояние пустого результата
+  const [errorResultApi, setErrorResultApi] = useState(''); // Состояние ошибки запроса
+  const [logged, setLogged] = useState(false);
+  const history = useHistory();
+  useEffect(() => {
+    if (logged) {
+      mainApi
+        .getUserInfo(localStorage.getItem("jwt"))
+        .then((userInfo) => {
+          setCurrentUser(userInfo);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [logged]);
 
   // Если пользователь уже делал поиск то монтируем cards из LS
   useEffect(() => {
@@ -91,7 +99,7 @@ function App() {
       if (filteredCards.length !== 0) {
         localStorage.setItem(lsName, JSON.stringify(filteredCards));
       } else {
-        setEmptyResult(true);
+        setEmptyResultQuery(true);
         localStorage.removeItem(lsName);
       }
     }
@@ -100,7 +108,7 @@ function App() {
   function handleQuerySubmit(query) {
     let convertCards;
     setEmptyQuery(false);
-    setEmptyResult(false);
+    setEmptyResultQuery(false);
     setLoading(true);
     if (!localStorage.getItem("cards")) {
       setLoading(true);
@@ -125,7 +133,7 @@ function App() {
   }
   function handleQuerySubmitSaved(query) {
     setEmptyQuery(false);
-    setEmptyResult(false);
+    setEmptyResultQuery(false);
     setLoading(true);
     if (!localStorage.getItem("saved-cards")) {
       setLoading(true);
@@ -169,57 +177,93 @@ function App() {
         console.log(err);
       });
   }
+  function handleRegister(onRegister) {
+    setLoading(true);
+    setErrorResultApi('');
+    mainApi
+      .sign(onRegister, '/signup')
+      .then(({ email }) => {
+        setLoading(false);
+        handleLogin({ email, password: onRegister.password })
+      })
+      .catch((err) => {
+        setLoading(false);
+        setErrorResultApi(err.message);
+      })
+  }
+  function handleLogin(onLogin) {
+    setLoading(true);
+    mainApi
+      .sign(onLogin, "/signin")
+      .then((jwt) => {
+        if (jwt) {
+          localStorage.setItem("jwt", jwt.token);
+          setLogged(true);
+          setLoading(false);
+          setCurrentUser(onLogin);
+          history.push("/movies");
+        } else {
+          throw jwt;
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err);
+      });
+  }
 
   return (
-    <div className="app">
-      <Switch>
-        <Route exact path="/">
-          <Main />
-          <Footer />
-        </Route>
-        <Route path="/movies">
-          <Header />
-          <Movies
-            onSubmit={handleQuerySubmit}
-            loading={loading}
-            errorQuery={errorQuery}
-            emptyQuery={emptyQuery}
-            emptyResult={emptyResult}
-            filteredCards={filteredCards}
-            savedCards={savedCards}
-            onCardLike={handleCardLike}
-          />
-          <Footer />
-        </Route>
-        <Route path="/saved-movies">
-          <Header />
-          <SavedMovies
-            onSubmit={handleQuerySubmitSaved}
-            loading={loading}
-            errorQuery={errorQuery}
-            emptyQuery={emptyQuery}
-            emptyResult={emptyResult}
-            savedCards={savedCards}
-            filteredSavedCards={filteredSavedCards}
-            onCardRemove={handleCardLike}
-          />
-          <Footer />
-        </Route>
-        <Route path="/profile">
-          <Header />
-          <Profile userInfo={currentUser} />
-        </Route>
-        <Route path="/signin">
-          <Login />
-        </Route>
-        <Route path="/signup">
-          <Register />
-        </Route>
-        <Route path="*">
-          <PageNotFound />
-        </Route>
-      </Switch>
-    </div>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="app">
+        <Switch>
+          <Route exact path="/">
+            <Main />
+            <Footer />
+          </Route>
+          <Route path="/movies">
+            <Header />
+            <Movies
+              onSubmit={handleQuerySubmit}
+              loading={loading}
+              errorQuery={errorQuery}
+              emptyQuery={emptyQuery}
+              emptyResult={emptyResultQuery}
+              filteredCards={filteredCards}
+              savedCards={savedCards}
+              onCardLike={handleCardLike}
+            />
+            <Footer />
+          </Route>
+          <Route path="/saved-movies">
+            <Header />
+            <SavedMovies
+              onSubmit={handleQuerySubmitSaved}
+              loading={loading}
+              errorQuery={errorQuery}
+              emptyQuery={emptyQuery}
+              emptyResult={emptyResultQuery}
+              savedCards={savedCards}
+              filteredSavedCards={filteredSavedCards}
+              onCardRemove={handleCardLike}
+            />
+            <Footer />
+          </Route>
+          <Route path="/profile">
+            <Header />
+            <Profile userInfo={currentUser} />
+          </Route>
+          <Route path="/signin">
+            <Login />
+          </Route>
+          <Route path="/signup">
+            <Register onRegister={handleRegister} errorResultApi={errorResultApi} />
+          </Route>
+          <Route path="*">
+            <PageNotFound />
+          </Route>
+        </Switch>
+      </div>
+    </CurrentUserContext.Provider>
   )
 }
 
