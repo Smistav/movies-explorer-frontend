@@ -19,7 +19,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({ name: "", email: "" }); // данные пользователя
   const [cards, setCards] = useState([]); // Все карточки MovieApi
   const [savedCards, setSavedCards] = useState([]); // карточки пользователя
-  const [filteredCards, setFilteredCards] = useState(); // поиск пользователя
+  const [filteredCards, setFilteredCards] = useState([]); // поиск пользователя
   const [filteredSavedCards, setFilteredSavedCards] = useState([]);// поиск пользователя сохраненных карточек
   const [loading, setLoading] = useState(false); // состояние Прелоадера
   const [errorQuery, setErrorQuery] = useState(false); //Состояние связи с сервером MovieApi
@@ -28,6 +28,23 @@ function App() {
   const [errorResultApi, setErrorResultApi] = useState(''); // Состояние ошибки запроса
   const [logged, setLogged] = useState(false);
   const history = useHistory();
+  useEffect(() => {
+    function checkToken() {
+      if (localStorage.getItem("jwt")) {
+        const jwt = localStorage.getItem("jwt");
+        mainApi
+          .checkToken(jwt)
+          .then((userInfo) => {
+            setCurrentUser(userInfo);
+            setLogged(true);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    }
+    checkToken();
+  }, [logged]);
   useEffect(() => {
     if (logged) {
       mainApi
@@ -40,7 +57,10 @@ function App() {
         });
     }
   }, [logged]);
+
   function resetLS() {
+    setFilteredCards([]);
+    setFilteredSavedCards([]);
     localStorage.removeItem("cards");
     localStorage.removeItem("saved-cards");
     localStorage.removeItem("filtered-cards");
@@ -66,7 +86,7 @@ function App() {
     } else {
       setSavedCards(JSON.parse(localStorage.getItem("saved-cards")));
     }
-  }, [])
+  }, [currentUser])
   // проверяем в LS filtered-cards и saved-filtered-cards при монтировании
   // если пользователь вернулся(не забыть удалять после logout)
   useEffect(() => {
@@ -79,6 +99,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem("saved-cards", JSON.stringify(savedCards));
   }, [savedCards]);
+
   // В начале загрузки 
   // Если LS пустой подключаем moviesApi
   // Если нет берем из LS
@@ -165,9 +186,9 @@ function App() {
     const { country, director, duration, year, description, image, trailer, thumbnail,
       nameEN, nameRU, id: movieId } = card;
     const isLiked = savedCards.some((savedCard) =>
-      savedCard.movieId === (card.id || card.movieId));
-    const deleteCard = savedCards.find((savedCard) =>
-      savedCard.movieId === (card.id || card.movieId)) || '';
+      ((savedCard.movieId === (card.id || card.movieId)) && savedCard.owner === currentUser._id));
+    const deleteCard = savedCards.find((savedCard) => (
+      (savedCard.movieId === (card.id || card.movieId)) && savedCard.owner === currentUser._id)) || '';
     mainApi
       .changeLikeCardStatus({
         country, director, duration, year, description, image, trailer, thumbnail,
@@ -242,6 +263,7 @@ function App() {
               filteredCards={filteredCards}
               savedCards={savedCards}
               onCardLike={handleCardLike}
+              owner={currentUser._id}
             />
             <Footer />
           </Route>

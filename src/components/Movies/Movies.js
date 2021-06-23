@@ -10,7 +10,8 @@ import {
   INIT_CARDS_320, ERROR_QUERY, EMPTY_QUERY, EMPTY_RESULT
 } from '../../utils/constants';
 
-function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQuery, onSubmit, onCardLike, savedCards }) {
+function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQuery,
+  onSubmit, onCardLike, savedCards, owner }) {
   function setCountCard(str) {
     let initCountCards = 0;
     let addCountCards = 0;
@@ -59,6 +60,7 @@ function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQue
           onCardLike={onCardLike}
           savedCards={savedCards}
           cards={filteredCards}
+          owner={owner}
         />) : ""}
         {more && (<More onClick={handleClick} />)}
       </div>

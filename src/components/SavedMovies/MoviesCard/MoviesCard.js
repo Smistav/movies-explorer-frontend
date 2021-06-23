@@ -2,7 +2,7 @@ import React from 'react';
 import './MoviesCard.css';
 import Card from '../../Card/Card';
 
-function MoviesCard({ card, onCardRemove }) {
+function MoviesCard({ card, onCardRemove, owner }) {
   function handleRemoveOn(evt) {
     evt.target.closest('figure')
       .querySelector('.movies-card__remove')

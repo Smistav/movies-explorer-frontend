@@ -1,19 +1,18 @@
 import React from "react";
 import PopupForm from "../PopupForm/PopupForm";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import './Profile.css';
 
 function Profile({ onLogout }) {
-  const user = {
-    name: "Станислав",
-    email: "sol@url.ru"
-  };
+  const currentUser = React.useContext(CurrentUserContext);
+
   function handleLogout() {
     onLogout();
   }
   return (
     <PopupForm
       name="profile"
-      title={`Привет, ${user.name}`}
+      title={`Привет, ${currentUser.name}`}
       buttonName="Редактировать"
       underButtonText=""
       underButtonName="Выйти из аккаунта"
@@ -31,7 +30,7 @@ function Profile({ onLogout }) {
           minLength="2"
           maxLength="40"
           autoComplete="off"
-          defaultValue={user.name}
+          defaultValue={currentUser.name}
           required
         />
         <span id="name-input-error" className="popup__error">
@@ -51,7 +50,7 @@ function Profile({ onLogout }) {
           minLength="2"
           maxLength="40"
           autoComplete="off"
-          defaultValue={user.email}
+          defaultValue={currentUser.email}
           required
         />
         <span id="email-input-error" className="popup__error">
