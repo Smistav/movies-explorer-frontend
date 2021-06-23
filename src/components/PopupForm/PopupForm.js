@@ -30,7 +30,7 @@ function PopupForm({ name, title, buttonName, underButtonText,
 
         <div className={`popup__block-link popup__block-link_form_${name}`}>
           <p className={`popup__paragraph popup__paragraph_form_${name}`}>{underButtonText}</p>
-          <Link onCick={onLogout} to={path} className={`main__link popup__link-bottom popup__link-bottom_form_${name}`}>
+          <Link onClick={onLogout} to={path} className={`main__link popup__link-bottom popup__link-bottom_form_${name}`}>
             {underButtonName}
           </Link>
         </div>

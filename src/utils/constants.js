@@ -13,3 +13,5 @@ export const INIT_CARDS_320 = 5;
 export const ERROR_QUERY = "Во время запроса произошла ошибка.Возможно, проблема с соединением или сервер недоступен.Подождите немного и попробуйте ещё раз";
 export const EMPTY_QUERY = "Нужно ввести ключевое слово";
 export const EMPTY_RESULT = "Ничего не найдено";
+// Form Input
+export const PATTERN_NAME = '^[a-zA-Zа-яёА-ЯЁ -]{2,30}$';

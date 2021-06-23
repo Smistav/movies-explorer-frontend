@@ -1,19 +1,19 @@
 import { useState } from "react";
 import useCustomValidate from "./useCustomValidate";
 
-function useCustomForm({ initialValues, onSubmit }) {
-  const [values, setValues] = useState(initialValues);
+function useCustomForm({ onSubmit }) {
+  const [values, setValues] = useState({});
   const { errors, validForm, handleValidate } = useCustomValidate();
 
-  function handleChange(e) {
-    const { target } = e;
-    const { name, value } = target;
+  function handleChange(evt) {
+    const target = evt.target;
+    const value = target.value;
+    const name = target.name;
     setValues({ ...values, [name]: value });
-    handleValidate(name, value);
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
+    handleValidate(evt);
+  };
+  function handleSubmit(evt) {
+    evt.preventDefault();
     onSubmit(values);
   }
   return {

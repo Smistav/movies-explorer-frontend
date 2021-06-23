@@ -264,7 +264,7 @@ function App() {
             <Profile userInfo={currentUser} onLogout={handleLogout} />
           </Route>
           <Route path="/signin">
-            <Login />
+            <Login onLogin={handleLogin} errorResultApi={errorResultApi} />
           </Route>
           <Route path="/signup">
             <Register onRegister={handleRegister} errorResultApi={errorResultApi} />

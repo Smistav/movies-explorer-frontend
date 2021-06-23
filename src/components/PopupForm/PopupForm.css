@@ -104,6 +104,7 @@
 /* Component Login */
 .popup__button_form_login {
   margin-top: 192px;
+  position: relative;
 }
 .popup__button_form_login_disabled {
   opacity: 0.2;
@@ -112,6 +113,12 @@
 
 .popup__button_form_login_disabled:hover {
   opacity: 0.2;
+}
+.popup__error_form_login {
+  top: -25px;
+  width: 100%;
+  text-align: center;
+  cursor: unset;
 }
 @media screen and (max-width: 768px) {
   .popup__button_form_login {

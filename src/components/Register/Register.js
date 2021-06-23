@@ -4,23 +4,16 @@ import Logo from "../Logo/Logo";
 import { Link } from "react-router-dom";
 import useCustomForm from "../../hooks/useCustomForm";
 import './Register.css';
+import { PATTERN_NAME } from "../../utils/constants";
 
 function Register({ onRegister, errorResultApi }) {
-  const initialValues = {
-    name: "",
-    email: "",
-    password: "",
-  };
   const {
     values,
     errors,
     validForm,
     handleChange,
     handleSubmit,
-  } = useCustomForm({
-    initialValues,
-    onSubmit: (values) => onRegister(values),
-  });
+  } = useCustomForm({ onSubmit: (values) => onRegister(values) });
   return (
     <>
       <Link className="main__link register__link" to="/">
@@ -42,9 +35,10 @@ function Register({ onRegister, errorResultApi }) {
           <input
             id="name-input"
             name="name"
-            value={values.name}
+            value={values.name || ''}
             onChange={handleChange}
             placeholder="Имя"
+            pattern={PATTERN_NAME}
             className="popup__input"
             type="text"
             minLength="2"
@@ -67,7 +61,7 @@ function Register({ onRegister, errorResultApi }) {
           <input
             id="email-input"
             name="email"
-            value={values.email}
+            value={values.email || ''}
             onChange={handleChange}
             placeholder="Email"
             className="popup__input"
@@ -92,7 +86,7 @@ function Register({ onRegister, errorResultApi }) {
           <input
             id="password"
             name="password"
-            value={values.password}
+            value={values.password || ''}
             onChange={handleChange}
             placeholder="Пароль"
             className="popup__input"
