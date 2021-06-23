@@ -156,8 +156,6 @@
 .popup__button_form_register_disabled:hover {
   opacity: 0.2;
 }
-.popup__block-link_form_register {
-}
 .popup__error_form_register {
   top: -25px;
   width: 100%;
@@ -237,6 +235,7 @@
   padding: 0;
   outline: none;
   box-sizing: border-box;
+  position: relative;
 }
 .popup__block-link_form_profile {
   font-style: normal;
@@ -256,6 +255,19 @@
 }
 .popup__link-bottom_form_profile {
   color: #4285f4;
+}
+.popup__button_form_profile_disabled {
+  opacity: 0.2;
+  cursor: unset;
+}
+.popup__button_form_profile_disabled:hover {
+  opacity: 0.2;
+}
+.popup__error_form_profile {
+  top: -25px;
+  width: 100%;
+  text-align: center;
+  cursor: unset;
 }
 @media screen and (max-width: 768px) {
   .popup__header_form_profile {

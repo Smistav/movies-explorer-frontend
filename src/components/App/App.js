@@ -219,6 +219,7 @@ function App() {
   }
   function handleLogin(onLogin) {
     setLoading(true);
+    setErrorResultApi('');
     mainApi
       .sign(onLogin, "/signin")
       .then((jwt) => {
@@ -227,7 +228,7 @@ function App() {
           setLogged(true);
           setLoading(false);
           resetLS();
-          setCurrentUser(onLogin);
+          // setCurrentUser(onLogin);
           history.push("/movies");
         } else {
           throw jwt;
@@ -235,7 +236,21 @@ function App() {
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err);
+        setErrorResultApi(err.message);
+      });
+  }
+  function handleEditUser(onEditUser) {
+    setLoading(true);
+    setErrorResultApi('');
+    mainApi
+      .setUserInfo(onEditUser, localStorage.getItem("jwt"))
+      .then((userInfo) => {
+        setCurrentUser(userInfo);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        setErrorResultApi(err.message);
       });
   }
   function handleLogout() {
@@ -283,7 +298,10 @@ function App() {
           </Route>
           <Route path="/profile">
             <Header />
-            <Profile userInfo={currentUser} onLogout={handleLogout} />
+            <Profile
+              onEditUser={handleEditUser}
+              errorResultApi={errorResultApi}
+              onLogout={handleLogout} />
           </Route>
           <Route path="/signin">
             <Login onLogin={handleLogin} errorResultApi={errorResultApi} />

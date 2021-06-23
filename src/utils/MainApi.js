@@ -13,7 +13,7 @@ class Api {
   // Методы Карточек Фильмов
 
   getMovieCards(jwt) {
-    return fetch(this._baseUrl + '/movies', {
+    return fetch(`${this._baseUrl}/movies`, {
       headers: {
         'Content-Type': 'application/json',
         'authorization': `Bearer ${jwt}`
@@ -57,7 +57,7 @@ class Api {
     );
   }
   setUserInfo({ name, email }, jwt) {
-    return fetch(this._baseUrl + "/users/me", {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
         'Content-Type': 'application/json',
