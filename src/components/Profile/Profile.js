@@ -1,4 +1,4 @@
-import React from "react";
+import { useContext } from "react";
 import PopupForm from "../PopupForm/PopupForm";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import useCustomForm from "../../hooks/useCustomForm";
@@ -6,14 +6,19 @@ import { PATTERN_NAME } from "../../utils/constants";
 import './Profile.css';
 
 function Profile({ onLogout, onEditUser, errorResultApi }) {
-  const currentUser = React.useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
   const {
     values,
     errors,
     validForm,
     handleChange,
     handleSubmit,
-  } = useCustomForm({ onSubmit: (values) => onEditUser(values) });
+  } = useCustomForm({
+    onSubmit: (values) => onEditUser({
+      name: values.name || currentUser.name,
+      email: values.email || currentUser.email
+    })
+  });
 
   function handleLogout() {
     onLogout();

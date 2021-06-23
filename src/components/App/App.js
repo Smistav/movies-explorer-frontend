@@ -48,7 +48,7 @@ function App() {
   useEffect(() => {
     if (logged) {
       mainApi
-        .getUserInfo(localStorage.getItem("jwt"))
+        .getUser(localStorage.getItem("jwt"))
         .then((userInfo) => {
           setCurrentUser(userInfo);
         })
@@ -73,7 +73,6 @@ function App() {
   // при заходе пользователя монтируем saved-cards либо из API либо из LS
   useEffect(() => {
     if (!localStorage.getItem("saved-cards")) {
-      setErrorQuery(false);
       mainApi
         .getMovieCards(localStorage.getItem("jwt"))
         .then((cards) => {
@@ -81,7 +80,7 @@ function App() {
           localStorage.setItem("saved-cards", JSON.stringify(cards));
         })
         .catch((err) => {
-          setErrorQuery(true);
+          console.log(err);
         });
     } else {
       setSavedCards(JSON.parse(localStorage.getItem("saved-cards")));
@@ -135,6 +134,7 @@ function App() {
     let convertCards;
     setEmptyQuery(false);
     setEmptyResultQuery(false);
+    setErrorQuery(false);
     setLoading(true);
     if (!localStorage.getItem("cards")) {
       setLoading(true);
@@ -147,7 +147,7 @@ function App() {
           setLoading(false);
           setFilteredCards(filteredQuery(query, convertCards, "filtered-cards"));
         })
-        .catch((err) => {
+        .catch(() => {
           setLoading(false);
           setErrorQuery(true);
         });
@@ -160,6 +160,7 @@ function App() {
   function handleQuerySubmitSaved(query) {
     setEmptyQuery(false);
     setEmptyResultQuery(false);
+    setErrorQuery(false);
     setLoading(true);
     if (!localStorage.getItem("saved-cards")) {
       setLoading(true);
@@ -171,7 +172,7 @@ function App() {
           setLoading(false);
           setFilteredSavedCards(filteredQuery(query, cards, "filtered-saved-cards"));
         })
-        .catch((err) => {
+        .catch(() => {
           setLoading(false);
           setErrorQuery(true);
         });
@@ -242,15 +243,16 @@ function App() {
   function handleEditUser(onEditUser) {
     setLoading(true);
     setErrorResultApi('');
+    console.log(onEditUser);
     mainApi
-      .setUserInfo(onEditUser, localStorage.getItem("jwt"))
+      .setUser(onEditUser, localStorage.getItem("jwt"))
       .then((userInfo) => {
         setCurrentUser(userInfo);
         setLoading(false);
       })
       .catch((err) => {
         setLoading(false);
-        setErrorResultApi(err.message);
+        setErrorResultApi(err.validation.body.message);
       });
   }
   function handleLogout() {

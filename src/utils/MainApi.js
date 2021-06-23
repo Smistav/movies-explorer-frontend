@@ -46,7 +46,7 @@ class Api {
   }
   // Методы для users
 
-  getUserInfo(jwt) {
+  getUser(jwt) {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: {
         'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ class Api {
       this._checkResponse
     );
   }
-  setUserInfo({ name, email }, jwt) {
+  setUser({ name, email }, jwt) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
