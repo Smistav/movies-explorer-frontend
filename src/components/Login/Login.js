@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import useCustomForm from "../../hooks/useCustomForm";
 import './Login.css';
 
-function Login({ onLogin, errorResultApi }) {
+function Login({ onLogin, errorResultApi, loading }) {
   const {
     values,
     errors,
@@ -26,6 +26,7 @@ function Login({ onLogin, errorResultApi }) {
         path="/signup"
         onSubmit={handleSubmit}
         validForm={validForm}
+        loading={loading}
         errorResultApi={errorResultApi}
       >
         <div className="popup__input-container">

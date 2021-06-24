@@ -5,7 +5,7 @@ import useCustomForm from "../../hooks/useCustomForm";
 import { PATTERN_NAME } from "../../utils/constants";
 import './Profile.css';
 
-function Profile({ onLogout, onEditUser, errorResultApi }) {
+function Profile({ onLogout, onEditUser, errorResultApi, okResultApi, loading }) {
   const currentUser = useContext(CurrentUserContext);
   const {
     values,
@@ -34,7 +34,9 @@ function Profile({ onLogout, onEditUser, errorResultApi }) {
       onLogout={handleLogout}
       onSubmit={handleSubmit}
       validForm={validForm}
+      loading={loading}
       errorResultApi={errorResultApi}
+      okResultApi={okResultApi}
     >
       <div className={`popup__input-container popup__input-container_form_profile`}>
         <p className={`popup__input-header popup__input-header_form_profile`}>Имя</p>

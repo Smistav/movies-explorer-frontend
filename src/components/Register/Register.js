@@ -5,7 +5,7 @@ import useCustomForm from "../../hooks/useCustomForm";
 import './Register.css';
 import { PATTERN_NAME } from "../../utils/constants";
 
-function Register({ onRegister, errorResultApi }) {
+function Register({ onRegister, errorResultApi, loading }) {
   const {
     values,
     errors,
@@ -27,6 +27,7 @@ function Register({ onRegister, errorResultApi }) {
         path="/signin"
         onSubmit={handleSubmit}
         validForm={validForm}
+        loading={loading}
         errorResultApi={errorResultApi}
       >
         <div className="popup__input-container">

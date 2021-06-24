@@ -12,7 +12,7 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 import './App.css';
-import { URL_SERVER_MOVIES_API } from "../../utils/constants";
+import { URL_SERVER_MOVIES_API, OK_RESULT_API } from "../../utils/constants";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 
@@ -26,7 +26,8 @@ function App() {
   const [errorQuery, setErrorQuery] = useState(false); //Состояние связи с сервером MovieApi
   const [emptyQuery, setEmptyQuery] = useState(false); // Состояние пустого запроса
   const [emptyResultQuery, setEmptyResultQuery] = useState(false); // Состояние пустого результата
-  const [errorResultApi, setErrorResultApi] = useState(''); // Состояние ошибки запроса
+  const [errorResultApi, setErrorResultApi] = useState(''); // Состояние ошибки запроса на изменение данных
+  const [okResultApi, setOkResultApi] = useState(''); // Состояние OK запроса на изменение данных
   const [logged, setLogged] = useState(false);
   const [checkboxSavedCards, setCheckboxSavedCards] = useState(true);// Состояние чекбокса в SavedCards
   const [checkboxCards, setCheckboxCards] = useState(true);// Состояние чекбокса в Cards
@@ -257,11 +258,13 @@ function App() {
   function handleEditUser(onEditUser) {
     setLoading(true);
     setErrorResultApi('');
+    setOkResultApi('');
     mainApi
       .setUser(onEditUser, localStorage.getItem("jwt"))
       .then((userInfo) => {
         setCurrentUser(userInfo);
         setLoading(false);
+        setOkResultApi(OK_RESULT_API);
       })
       .catch((err) => {
         setLoading(false);
@@ -320,13 +323,21 @@ function App() {
             component={Profile}
             onEditUser={handleEditUser}
             errorResultApi={errorResultApi}
+            okResultApi={okResultApi}
+            loading={loading}
             onLogout={handleLogout}
           />
           <Route path="/signin">
-            <Login onLogin={handleLogin} errorResultApi={errorResultApi} />
+            <Login
+              onLogin={handleLogin}
+              loading={loading}
+              errorResultApi={errorResultApi} />
           </Route>
           <Route path="/signup">
-            <Register onRegister={handleRegister} errorResultApi={errorResultApi} />
+            <Register
+              onRegister={handleRegister}
+              loading={loading}
+              errorResultApi={errorResultApi} />
           </Route>
           <Route path="*">
             <PageNotFound />

@@ -1,19 +1,21 @@
 import { Link } from "react-router-dom";
+import Preloader from "../Preloader/Preloader";
 import './PopupForm.css';
 
 function PopupForm({ name, title, buttonName, underButtonText,
-  underButtonName, path, children, validForm, Loading, onSubmit, onLogout, errorResultApi }) {
+  underButtonName, path, children, validForm, loading, onSubmit, onLogout, errorResultApi, okResultApi }) {
   return (
     <div>
+      {loading && (<Preloader />)}
       <form
         onSubmit={onSubmit}
         name={`form_${name}`}
-        className={`popup__container popup__container_form_${name}`}
+        className={`popup__container popup__container_form_${name} ${loading ? 'popup__container_hover' : ''}`}
         noValidate>
         <h4 className={`popup__header popup__header_form_${name}`}>{title}</h4>
         {children}
         <button
-          disabled={!validForm || Loading}
+          disabled={!validForm || ''}
           type="submit"
           name="button"
           className={`main__link popup__button popup__button_form_${name} 
@@ -23,6 +25,11 @@ function PopupForm({ name, title, buttonName, underButtonText,
           {errorResultApi && (
             <span className={`popup__error popup__error_visible popup__error_form_${name}`}>
               {errorResultApi}
+            </span>
+          )}
+          {okResultApi && (
+            <span className={`popup__ok popup__ok_visible popup__ok_form_${name}`}>
+              {okResultApi}
             </span>
           )}
         </button>
