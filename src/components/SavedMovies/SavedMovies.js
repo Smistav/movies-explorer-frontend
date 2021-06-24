@@ -9,24 +9,22 @@ import { ERROR_QUERY, EMPTY_QUERY, EMPTY_RESULT } from '../../utils/constants';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function SavedMovies({ savedCards, filteredSavedCards = "", loading, errorQuery,
-  emptyResult, emptyQuery, onSubmit, onCardRemove }) {
+  emptyResult, emptyQuery, onSubmit, onCardRemove, onCheckbox, checkbox }) {
   const currentUser = useContext(CurrentUserContext);
   const [shortSavedMovies, setShortSavedMovies] = useState([]); // Состояние короткометражных сохраненных фильмов
-  const [checkbox, setCheckbox] = useState(true);
+
   function checkOwnerCardList() {
     return savedCards.some(item => item.owner === currentUser._id)
   }
   useEffect(() => {
-    const cards = filteredSavedCards !== "" ? filteredSavedCards : savedCards;
+    const cards = filteredSavedCards.length !== 0 ? filteredSavedCards : savedCards;
     setShortSavedMovies(cards.filter(card => card.duration <= 40));
   }, [savedCards, filteredSavedCards]);
-  function handleCheckbox() {
-    setCheckbox(!checkbox);
-  }
+
   return (
     <section className="main movies">
       <div className="main__container">
-        <SearchForm onSubmit={onSubmit} onCheckbox={handleCheckbox} checkbox={checkbox} />
+        <SearchForm onSubmit={onSubmit} onCheckbox={onCheckbox} checkbox={checkbox} />
         {loading && (<Preloader />)}
         {errorQuery && (<ErrorQuery errorName={ERROR_QUERY} />)}
         {emptyQuery && (<ErrorQuery errorName={EMPTY_QUERY} />)}

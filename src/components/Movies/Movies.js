@@ -11,7 +11,7 @@ import {
 } from '../../utils/constants';
 
 function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQuery,
-  onSubmit, onCardLike, savedCards, owner }) {
+  onSubmit, onCardLike, savedCards, owner, onCheckbox, checkbox }) {
   function setCountCard(str) {
     let initCountCards = 0;
     let addCountCards = 0;
@@ -42,7 +42,6 @@ function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQue
     window.addEventListener("resize", setCountCard);
   }, []);
   const [countCards, setCountCards] = useState(setCountCard('init'));
-  const [checkbox, setCheckbox] = useState(true);
   const [shortMovies, setShortMovies] = useState([]); // Состояние короткометражных фильмов
   const [more, setMore] = useState(false);
   const filteredCardListLength = checkbox ? shortMovies.length : filteredCards.length;
@@ -53,13 +52,11 @@ function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQue
   function handleClick() {
     setCountCards(countCards + setCountCard('add'));
   }
-  function handleCheckbox() {
-    setCheckbox(!checkbox);
-  }
+
   return (
     <section className="main movies">
       <div className="main__container movies__container">
-        <SearchForm onSubmit={onSubmit} onCheckbox={handleCheckbox} checkbox={checkbox} />
+        <SearchForm onSubmit={onSubmit} onCheckbox={onCheckbox} checkbox={checkbox} />
         {loading && (<Preloader />)}
         {errorQuery && (<ErrorQuery errorName={ERROR_QUERY} />)}
         {emptyQuery && (<ErrorQuery errorName={EMPTY_QUERY} />)}

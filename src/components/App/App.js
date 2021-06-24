@@ -28,8 +28,16 @@ function App() {
   const [emptyResultQuery, setEmptyResultQuery] = useState(false); // Состояние пустого результата
   const [errorResultApi, setErrorResultApi] = useState(''); // Состояние ошибки запроса
   const [logged, setLogged] = useState(false);
+  const [checkboxSavedCards, setCheckboxSavedCards] = useState(true);// Состояние чекбокса в SavedCards
+  const [checkboxCards, setCheckboxCards] = useState(true);// Состояние чекбокса в Cards
   const history = useHistory();
 
+  function handleCheckboxSavedCards() {
+    setCheckboxSavedCards(!checkboxSavedCards);
+  }
+  function handleCheckboxCards() {
+    setCheckboxCards(!checkboxCards);
+  }
   useEffect(() => {
     function checkToken() {
       if (localStorage.getItem("jwt")) {
@@ -47,6 +55,15 @@ function App() {
     }
     checkToken();
   }, [logged]);
+
+  useEffect(() => {
+    if (!localStorage.getItem("saved-cards")) {
+      getSavedMovies();
+    } else {
+      setSavedCards(JSON.parse(localStorage.getItem("saved-cards")));
+    }
+  }, [currentUser]);
+
   useEffect(() => {
     if (logged) {
       mainApi
@@ -59,35 +76,10 @@ function App() {
         });
     }
   }, [logged]);
-
-  function resetLS() {
-    setFilteredCards([]);
-    setFilteredSavedCards([]);
-    localStorage.removeItem("cards");
-    localStorage.removeItem("saved-cards");
-    localStorage.removeItem("filtered-cards");
-    localStorage.removeItem("filtered-saved-cards");
-  }
   // Если пользователь уже делал поиск то монтируем cards из LS
   useEffect(() => {
     localStorage.getItem("cards") && setCards(JSON.parse(localStorage.getItem("cards")));
   }, []);
-  // при заходе пользователя монтируем saved-cards либо из API либо из LS
-  useEffect(() => {
-    if (!localStorage.getItem("saved-cards")) {
-      mainApi
-        .getMovieCards(localStorage.getItem("jwt"))
-        .then((cards) => {
-          setSavedCards(cards);
-          localStorage.setItem("saved-cards", JSON.stringify(cards));
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      setSavedCards(JSON.parse(localStorage.getItem("saved-cards")));
-    }
-  }, [currentUser])
   // проверяем в LS filtered-cards и saved-filtered-cards при монтировании
   // если пользователь вернулся(не забыть удалять после logout)
   useEffect(() => {
@@ -98,8 +90,8 @@ function App() {
   }, []);
   // Отслеживаем по SavedCards данные в LS когда удаляем или добавляем карточку.
   useEffect(() => {
-    localStorage.setItem("saved-cards", JSON.stringify(savedCards));
-  }, [savedCards]);
+    logged && localStorage.setItem("saved-cards", JSON.stringify(savedCards));
+  }, [savedCards, logged]);
 
   // В начале загрузки 
   // Если LS пустой подключаем moviesApi
@@ -219,6 +211,28 @@ function App() {
         setErrorResultApi(err.message);
       })
   }
+  function resetLS() {
+    localStorage.removeItem("saved-cards");
+    localStorage.removeItem("filtered-cards");
+    localStorage.removeItem("filtered-saved-cards");
+    localStorage.removeItem("jwt");
+  }
+  function resetFilter() {
+    setFilteredCards([]);
+    setFilteredSavedCards([]);
+  }
+  // при заходе пользователя монтируем saved-cards либо из API либо из LS
+  function getSavedMovies() {
+    mainApi
+      .getMovieCards(localStorage.getItem("jwt"))
+      .then((cards) => {
+        setSavedCards(cards);
+        localStorage.setItem("saved-cards", JSON.stringify(cards));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   function handleLogin(onLogin) {
     setLoading(true);
     setErrorResultApi('');
@@ -229,7 +243,7 @@ function App() {
           localStorage.setItem("jwt", jwt.token);
           setLogged(true);
           setLoading(false);
-          resetLS();
+          getSavedMovies();
           history.push("/movies");
         } else {
           throw jwt;
@@ -257,7 +271,8 @@ function App() {
   function handleLogout() {
     setLogged(false);
     setCurrentUser({ name: "", email: "" });
-    localStorage.removeItem("jwt");
+    resetLS();
+    resetFilter();
     history.push("/");
   }
   return (
@@ -281,6 +296,8 @@ function App() {
             savedCards={savedCards}
             onCardLike={handleCardLike}
             owner={currentUser._id}
+            onCheckbox={handleCheckboxCards}
+            checkbox={checkboxCards}
           />
           <ProtectedRoute
             logged={logged}
@@ -294,6 +311,8 @@ function App() {
             savedCards={savedCards}
             filteredSavedCards={filteredSavedCards}
             onCardRemove={handleCardLike}
+            onCheckbox={handleCheckboxSavedCards}
+            checkbox={checkboxSavedCards}
           />
           <ProtectedRoute
             logged={logged}
