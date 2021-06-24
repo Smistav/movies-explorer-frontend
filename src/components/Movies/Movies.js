@@ -11,7 +11,7 @@ import {
 } from '../../utils/constants';
 
 function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQuery,
-  onSubmit, onCardLike, savedCards, owner }) {
+  onSubmit, onCardLike, savedCards, owner, onCheckbox }) {
   function setCountCard(str) {
     let initCountCards = 0;
     let addCountCards = 0;
@@ -50,7 +50,7 @@ function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQue
   return (
     <section className="main movies">
       <div className="main__container movies__container">
-        <SearchForm onSubmit={onSubmit} />
+        <SearchForm onSubmit={onSubmit} onCheckbox={onCheckbox} />
         {loading && (<Preloader />)}
         {errorQuery && (<ErrorQuery errorName={ERROR_QUERY} />)}
         {emptyQuery && (<ErrorQuery errorName={EMPTY_QUERY} />)}

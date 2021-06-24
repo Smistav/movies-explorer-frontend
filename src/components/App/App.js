@@ -27,6 +27,7 @@ function App() {
   const [emptyQuery, setEmptyQuery] = useState(false); // Состояние пустого запроса
   const [emptyResultQuery, setEmptyResultQuery] = useState(false); // Состояние пустого результата
   const [errorResultApi, setErrorResultApi] = useState(''); // Состояние ошибки запроса
+  const [shortMovies, setShortMovies] = useState(true); // Состояние короткометражных фильмов
   const [logged, setLogged] = useState(false);
   const history = useHistory();
 
@@ -184,7 +185,10 @@ function App() {
       setFilteredSavedCards(filteredQuery(query, savedCards, "filtered-saved-cards"));
     }
   }
-
+  function handleCheckbox(click) {
+    console.log(shortMovies);
+    setShortMovies(click);
+  }
   function handleCardLike(card) {
     const { country, director, duration, year, description, image, trailer, thumbnail,
       nameEN, nameRU, id: movieId } = card;
@@ -264,14 +268,12 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
+        <Header logged={logged} />
         <Switch>
           <Route exact path="/">
-            <Header logged={logged} />
             <Main />
-            <Footer />
           </Route>
-          <ProtectedRoute>
-            <Header />
+          <ProtectedRoute
             logged={logged}
             path="/movies"
             component={Movies}
@@ -284,10 +286,10 @@ function App() {
             savedCards={savedCards}
             onCardLike={handleCardLike}
             owner={currentUser._id}
-            <Footer />
-          </ProtectedRoute>
-          <ProtectedRoute>
-            <Header />
+            onCheckbox={handleCheckbox}
+          />
+          <ProtectedRoute
+            logged={logged}
             path="/saved-movies"
             component={SavedMovies}
             onSubmit={handleQuerySubmitSaved}
@@ -298,16 +300,15 @@ function App() {
             savedCards={savedCards}
             filteredSavedCards={filteredSavedCards}
             onCardRemove={handleCardLike}
-            <Footer />
-          </ProtectedRoute>
-          <ProtectedRoute>
-            <Header />
+          />
+          <ProtectedRoute
+            logged={logged}
             path="/profile"
             component={Profile}
             onEditUser={handleEditUser}
             errorResultApi={errorResultApi}
             onLogout={handleLogout}
-          </ProtectedRoute>
+          />
           <Route path="/signin">
             <Login onLogin={handleLogin} errorResultApi={errorResultApi} />
           </Route>
@@ -318,6 +319,7 @@ function App() {
             <PageNotFound />
           </Route>
         </Switch>
+        <Footer />
       </div>
     </CurrentUserContext.Provider>
   )

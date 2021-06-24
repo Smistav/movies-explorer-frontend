@@ -1,11 +1,12 @@
 import { useState } from "react";
 import './SearchForm.css';
 
-function SearchForm({ onSubmit }) {
-  const [checkboxFilm, setCheckboxFilm] = useState(true);
+function SearchForm({ onSubmit, onCheckbox }) {
+  const [checkbox, setCheckboxFilm] = useState(true);
   const [query, setQuery] = useState('');
   function handleClickCheckbox() {
-    setCheckboxFilm(!checkboxFilm);
+    setCheckboxFilm(!checkbox);
+    onCheckbox(checkbox);
   }
   function handleChange(e) {
     const { target } = e;
@@ -36,7 +37,7 @@ function SearchForm({ onSubmit }) {
         className="form__slider"
         name="slider"
         id="slider"
-        defaultChecked={checkboxFilm}
+        defaultChecked={checkbox}
       />
       <label className="main__link" htmlFor="slider">Короткометражки</label>
     </div>
