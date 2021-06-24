@@ -11,7 +11,7 @@ import {
 } from '../../utils/constants';
 
 function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQuery,
-  onSubmit, onCardLike, savedCards, owner, onCheckbox }) {
+  onSubmit, onCardLike, savedCards, owner }) {
   function setCountCard(str) {
     let initCountCards = 0;
     let addCountCards = 0;
@@ -34,12 +34,18 @@ function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQue
       return addCountCards
     }
   }
+  // При монтировании сразу отфильтруем список коротких фильмов
+  useEffect(() => {
+    setShortMovies(filteredCards.filter(card => card.duration <= 40));
+  }, [filteredCards]);
   useEffect(() => {
     window.addEventListener("resize", setCountCard);
   }, []);
-  const filteredCardListLength = filteredCards.length;
   const [countCards, setCountCards] = useState(setCountCard('init'));
+  const [checkbox, setCheckbox] = useState(true);
+  const [shortMovies, setShortMovies] = useState([]); // Состояние короткометражных фильмов
   const [more, setMore] = useState(false);
+  const filteredCardListLength = checkbox ? shortMovies.length : filteredCards.length;
   useEffect(() => {
     countCards < filteredCardListLength ? setMore(true) : setMore(false);
   }, [countCards, filteredCardListLength]);
@@ -47,10 +53,13 @@ function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQue
   function handleClick() {
     setCountCards(countCards + setCountCard('add'));
   }
+  function handleCheckbox() {
+    setCheckbox(!checkbox);
+  }
   return (
     <section className="main movies">
       <div className="main__container movies__container">
-        <SearchForm onSubmit={onSubmit} onCheckbox={onCheckbox} />
+        <SearchForm onSubmit={onSubmit} onCheckbox={handleCheckbox} checkbox={checkbox} />
         {loading && (<Preloader />)}
         {errorQuery && (<ErrorQuery errorName={ERROR_QUERY} />)}
         {emptyQuery && (<ErrorQuery errorName={EMPTY_QUERY} />)}
@@ -59,7 +68,7 @@ function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQue
           countCards={countCards}
           onCardLike={onCardLike}
           savedCards={savedCards}
-          cards={filteredCards}
+          cards={checkbox ? shortMovies : filteredCards}
           owner={owner}
         />) : ""}
         {more && (<More onClick={handleClick} />)}

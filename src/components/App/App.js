@@ -27,7 +27,6 @@ function App() {
   const [emptyQuery, setEmptyQuery] = useState(false); // Состояние пустого запроса
   const [emptyResultQuery, setEmptyResultQuery] = useState(false); // Состояние пустого результата
   const [errorResultApi, setErrorResultApi] = useState(''); // Состояние ошибки запроса
-  const [shortMovies, setShortMovies] = useState(true); // Состояние короткометражных фильмов
   const [logged, setLogged] = useState(false);
   const history = useHistory();
 
@@ -185,10 +184,6 @@ function App() {
       setFilteredSavedCards(filteredQuery(query, savedCards, "filtered-saved-cards"));
     }
   }
-  function handleCheckbox(click) {
-    console.log(shortMovies);
-    setShortMovies(click);
-  }
   function handleCardLike(card) {
     const { country, director, duration, year, description, image, trailer, thumbnail,
       nameEN, nameRU, id: movieId } = card;
@@ -286,7 +281,6 @@ function App() {
             savedCards={savedCards}
             onCardLike={handleCardLike}
             owner={currentUser._id}
-            onCheckbox={handleCheckbox}
           />
           <ProtectedRoute
             logged={logged}

@@ -1,12 +1,10 @@
 import { useState } from "react";
 import './SearchForm.css';
 
-function SearchForm({ onSubmit, onCheckbox }) {
-  const [checkbox, setCheckboxFilm] = useState(true);
+function SearchForm({ onSubmit, onCheckbox, checkbox }) {
   const [query, setQuery] = useState('');
-  function handleClickCheckbox() {
-    setCheckboxFilm(!checkbox);
-    onCheckbox(checkbox);
+  function handleCheckbox() {
+    onCheckbox();
   }
   function handleChange(e) {
     const { target } = e;
@@ -32,7 +30,7 @@ function SearchForm({ onSubmit, onCheckbox }) {
         <button type="submit" name="button" className="main__link form__button">Найти</button>
       </form>
       <input
-        onClick={handleClickCheckbox}
+        onClick={handleCheckbox}
         type="checkbox"
         className="form__slider"
         name="slider"
