@@ -14,9 +14,10 @@ import moviesApi from "../../utils/MoviesApi";
 import './App.css';
 import { URL_SERVER_MOVIES_API, OK_RESULT_API } from "../../utils/constants";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
+  const [logged, setLogged] = useState(false);
   const [currentUser, setCurrentUser] = useState({ name: "", email: "" }); // данные пользователя
   const [cards, setCards] = useState([]); // Все карточки MovieApi
   const [savedCards, setSavedCards] = useState([]); // карточки пользователя
@@ -28,7 +29,6 @@ function App() {
   const [emptyResultQuery, setEmptyResultQuery] = useState(false); // Состояние пустого результата
   const [errorResultApi, setErrorResultApi] = useState(''); // Состояние ошибки запроса на изменение данных
   const [okResultApi, setOkResultApi] = useState(''); // Состояние OK запроса на изменение данных
-  const [logged, setLogged] = useState(false);
   const [checkboxSavedCards, setCheckboxSavedCards] = useState(true);// Состояние чекбокса в SavedCards
   const [checkboxCards, setCheckboxCards] = useState(true);// Состояние чекбокса в Cards
   const history = useHistory();
@@ -55,7 +55,7 @@ function App() {
       }
     }
     checkToken();
-  }, [logged]);
+  }, [history]);
 
   useEffect(() => {
     if (!localStorage.getItem("saved-cards") && logged) {
@@ -303,9 +303,9 @@ function App() {
             checkbox={checkboxCards}
           />
           <ProtectedRoute
+            component={SavedMovies}
             logged={logged}
             path="/saved-movies"
-            component={SavedMovies}
             onSubmit={handleQuerySubmitSaved}
             loading={loading}
             errorQuery={errorQuery}
@@ -318,9 +318,9 @@ function App() {
             checkbox={checkboxSavedCards}
           />
           <ProtectedRoute
-            logged={logged}
-            path="/profile"
             component={Profile}
+            path="/profile"
+            logged={logged}
             onEditUser={handleEditUser}
             errorResultApi={errorResultApi}
             okResultApi={okResultApi}
@@ -331,13 +331,15 @@ function App() {
             <Login
               onLogin={handleLogin}
               loading={loading}
-              errorResultApi={errorResultApi} />
+              errorResultApi={errorResultApi}
+            />
           </Route>
           <Route path="/signup">
             <Register
               onRegister={handleRegister}
               loading={loading}
-              errorResultApi={errorResultApi} />
+              errorResultApi={errorResultApi}
+            />
           </Route>
           <Route path="*">
             <PageNotFound />
