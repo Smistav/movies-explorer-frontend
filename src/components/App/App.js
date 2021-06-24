@@ -28,6 +28,7 @@ function App() {
   const [errorResultApi, setErrorResultApi] = useState(''); // Состояние ошибки запроса
   const [logged, setLogged] = useState(false);
   const history = useHistory();
+
   useEffect(() => {
     function checkToken() {
       if (localStorage.getItem("jwt")) {
@@ -229,7 +230,6 @@ function App() {
           setLogged(true);
           setLoading(false);
           resetLS();
-          // setCurrentUser(onLogin);
           history.push("/movies");
         } else {
           throw jwt;
@@ -243,7 +243,6 @@ function App() {
   function handleEditUser(onEditUser) {
     setLoading(true);
     setErrorResultApi('');
-    console.log(onEditUser);
     mainApi
       .setUser(onEditUser, localStorage.getItem("jwt"))
       .then((userInfo) => {
@@ -266,6 +265,7 @@ function App() {
       <div className="app">
         <Switch>
           <Route exact path="/">
+            <Header logged={logged} />
             <Main />
             <Footer />
           </Route>

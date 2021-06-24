@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import './Promo.css';
-import Logo from "../../Logo/Logo";
+// import Logo from "../../Logo/Logo";
 import promo_img from "../../../images/ball_web.svg"
 
 function Promo() {
@@ -13,7 +13,7 @@ function Promo() {
   return (
     <section className="main promo">
       <div className="main__container">
-        <div className="promo__header">
+        {/* <div className="promo__header">
           <Link className="main__link" to="/">
             <Logo />
           </Link>
@@ -25,7 +25,7 @@ function Promo() {
               Войти
           </Link>
           </div>
-        </div>
+        </div> */}
         <div className="main__body promo__body">
           <div className="main__description">
             <h1 className="main__title promo__title">Учебный проект студента факультета Веб-разработки.</h1>

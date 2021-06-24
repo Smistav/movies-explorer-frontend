@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import { useState, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Navigation.css';
 import './NavigationTablet.css';
-import './NavigationPhone.css'
+import './NavigationPhone.css';
 import account_icon from "../../images/account-icon.svg";
-import menu_icon_close from '../../images/icon_menu_close.svg'
+import menu_icon_close from '../../images/icon_menu_close.svg';
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Logo from '../Logo/Logo';
 
 function Navigation() {
+  const currentUser = useContext(CurrentUserContext);
   const [activeMenu, setActiveMenu] = useState(false);
   const [activeMenuT, setActiveMenuT] = useState(false);
   function handleClick() {
