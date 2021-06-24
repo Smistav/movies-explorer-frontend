@@ -14,6 +14,7 @@ import moviesApi from "../../utils/MoviesApi";
 import './App.css';
 import { URL_SERVER_MOVIES_API } from "../../utils/constants";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({ name: "", email: "" }); // данные пользователя
@@ -269,42 +270,44 @@ function App() {
             <Main />
             <Footer />
           </Route>
-          <Route path="/movies">
+          <ProtectedRoute>
             <Header />
-            <Movies
-              onSubmit={handleQuerySubmit}
-              loading={loading}
-              errorQuery={errorQuery}
-              emptyQuery={emptyQuery}
-              emptyResult={emptyResultQuery}
-              filteredCards={filteredCards}
-              savedCards={savedCards}
-              onCardLike={handleCardLike}
-              owner={currentUser._id}
-            />
+            logged={logged}
+            path="/movies"
+            component={Movies}
+            onSubmit={handleQuerySubmit}
+            loading={loading}
+            errorQuery={errorQuery}
+            emptyQuery={emptyQuery}
+            emptyResult={emptyResultQuery}
+            filteredCards={filteredCards}
+            savedCards={savedCards}
+            onCardLike={handleCardLike}
+            owner={currentUser._id}
             <Footer />
-          </Route>
-          <Route path="/saved-movies">
+          </ProtectedRoute>
+          <ProtectedRoute>
             <Header />
-            <SavedMovies
-              onSubmit={handleQuerySubmitSaved}
-              loading={loading}
-              errorQuery={errorQuery}
-              emptyQuery={emptyQuery}
-              emptyResult={emptyResultQuery}
-              savedCards={savedCards}
-              filteredSavedCards={filteredSavedCards}
-              onCardRemove={handleCardLike}
-            />
+            path="/saved-movies"
+            component={SavedMovies}
+            onSubmit={handleQuerySubmitSaved}
+            loading={loading}
+            errorQuery={errorQuery}
+            emptyQuery={emptyQuery}
+            emptyResult={emptyResultQuery}
+            savedCards={savedCards}
+            filteredSavedCards={filteredSavedCards}
+            onCardRemove={handleCardLike}
             <Footer />
-          </Route>
-          <Route path="/profile">
+          </ProtectedRoute>
+          <ProtectedRoute>
             <Header />
-            <Profile
-              onEditUser={handleEditUser}
-              errorResultApi={errorResultApi}
-              onLogout={handleLogout} />
-          </Route>
+            path="/profile"
+            component={Profile}
+            onEditUser={handleEditUser}
+            errorResultApi={errorResultApi}
+            onLogout={handleLogout}
+          </ProtectedRoute>
           <Route path="/signin">
             <Login onLogin={handleLogin} errorResultApi={errorResultApi} />
           </Route>
