@@ -57,12 +57,12 @@ function App() {
   }, [logged]);
 
   useEffect(() => {
-    if (!localStorage.getItem("saved-cards")) {
+    if (!localStorage.getItem("saved-cards") && logged) {
       getSavedMovies();
     } else {
       setSavedCards(JSON.parse(localStorage.getItem("saved-cards")));
     }
-  }, [currentUser]);
+  }, [currentUser, logged]);
 
   useEffect(() => {
     if (logged) {
