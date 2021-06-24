@@ -1,4 +1,3 @@
-import React from 'react';
 import '../../Movies/MoviesCardList/MoviesCardList';
 import MoviesCard from '../MoviesCard/MoviesCard';
 

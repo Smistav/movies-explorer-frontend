@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, Switch, Route, useLocation } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 import Logo from "../Logo/Logo";

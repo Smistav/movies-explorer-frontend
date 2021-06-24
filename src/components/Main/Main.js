@@ -1,4 +1,3 @@
-import React from "react";
 import './Main.css';
 import AboutMe from "./AboutMe/AboutMe";
 import AboutProject from "./AboutProject/AboutProject";

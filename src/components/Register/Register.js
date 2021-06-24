@@ -1,4 +1,3 @@
-import React from "react";
 import PopupForm from '../PopupForm/PopupForm';
 import Logo from "../Logo/Logo";
 import { Link } from "react-router-dom";

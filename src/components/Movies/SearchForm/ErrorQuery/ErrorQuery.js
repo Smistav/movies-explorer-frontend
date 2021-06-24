@@ -1,4 +1,3 @@
-import React from 'react';
 import './ErrorQuery.css';
 
 const ErrorQuery = ({ errorName }) => {

@@ -1,4 +1,3 @@
-import React from 'react';
 import './Card.css';
 
 function Card({ card, onRemove, offRemove, children }) {

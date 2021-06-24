@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import './Movies.css';
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import SearchForm from "./SearchForm/SearchForm";
@@ -38,14 +38,14 @@ function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQue
     window.addEventListener("resize", setCountCard);
   }, []);
   const filteredCardListLength = filteredCards.length;
-  const [countCards, setCountCards] = useState(setCountCard('init'));//initCountCards
+  const [countCards, setCountCards] = useState(setCountCard('init'));
   const [more, setMore] = useState(false);
   useEffect(() => {
     countCards < filteredCardListLength ? setMore(true) : setMore(false);
   }, [countCards, filteredCardListLength]);
 
   function handleClick() {
-    setCountCards(countCards + setCountCard('add'));//addCountCards
+    setCountCards(countCards + setCountCard('add'));
   }
   return (
     <section className="main movies">
