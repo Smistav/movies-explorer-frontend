@@ -263,9 +263,10 @@ function App() {
         if (jwt) {
           localStorage.setItem(JWT, jwt.token);
           setLogged(true);
+          localStorage.setItem("logged", "true");
           setLoading(false);
           getSavedMovies();
-          history.push(MAIN_PAGE);
+          history.push(MOVIES_PAGE);
         } else {
           throw jwt;
         }
