@@ -36,7 +36,8 @@ function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQue
   }
   // При монтировании сразу отфильтруем список коротких фильмов
   useEffect(() => {
-    setShortMovies(filteredCards.filter(card => card.duration <= SHORT_MOVIES_DURATION));
+    filteredCards.length !== 0 &&
+      setShortMovies(filteredCards.filter(card => card.duration <= SHORT_MOVIES_DURATION));
   }, [filteredCards]);
   useEffect(() => {
     window.addEventListener("resize", setCountCard);

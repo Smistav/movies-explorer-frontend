@@ -70,7 +70,7 @@ function App() {
       }
     }
     checkToken();
-  }, [])
+  }, [logged])
   useEffect(() => {
     if (logged) {
       if (!localStorage.getItem(LS_SAVED_CARDS)) {
