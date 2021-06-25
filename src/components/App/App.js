@@ -60,6 +60,7 @@ function App() {
           .then((userInfo) => {
             setCurrentUser(userInfo);
             setLogged(true);
+            localStorage.setItem("logged", "true");
           })
           .catch((err) => {
             console.log(err);
@@ -70,16 +71,6 @@ function App() {
     }
     checkToken();
   }, [])
-  // useEffect(() => {
-  //   Promise.all([checkToken()])
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
   useEffect(() => {
     if (logged) {
       if (!localStorage.getItem(LS_SAVED_CARDS)) {
@@ -242,6 +233,7 @@ function App() {
     localStorage.removeItem(LS_FILTERED_CARDS);
     localStorage.removeItem(LS_FILTERED_SAVED_CARDS);
     localStorage.removeItem(JWT);
+    localStorage.removeItem("logged");
   }
   function resetFilter() {
     setFilteredCards([]);

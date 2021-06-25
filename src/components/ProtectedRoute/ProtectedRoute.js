@@ -3,10 +3,11 @@ import { Route, Redirect } from "react-router-dom";
 import { MAIN_PAGE } from '../../utils/constants';
 
 const ProtectedRoute = ({ component: Component, ...props }) => {
+  const logged = localStorage.getItem("logged");
   return (
     <Route >
       {() =>
-        props.logged ? <Component {...props} /> : <Redirect to={MAIN_PAGE} />
+        logged ? <Component {...props} /> : <Redirect to={MAIN_PAGE} />
       }
     </Route>
   );
