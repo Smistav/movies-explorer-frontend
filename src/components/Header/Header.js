@@ -2,21 +2,24 @@ import { Link, Switch, Route, useLocation } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 import Logo from "../Logo/Logo";
 import './Header.css';
-
+import {
+  MAIN_PAGE, LOGIN_PAGE, REGISTER_PAGE, MOVIES_PAGE,
+  SAVED_MOVIES_PAGE, PROFILE_PAGE
+} from '../../utils/constants';
 function Header({ logged }) {
   const location = useLocation();
   return (
-    <div className={`main header ${location.pathname !== '/' && 'header_path_color'}`}>
+    <div className={`main header ${location.pathname !== MAIN_PAGE && 'header_path_color'}`}>
       <div className="main__container">
         <div className="header__block">
           <Switch>
-            <Route exact path="/">
+            <Route exact path={MAIN_PAGE}>
               {!logged && (
                 <>
-                  <Link className="main__link" to="/"><Logo /></Link>
+                  <Link className="main__link" to={MAIN_PAGE}><Logo /></Link>
                   <div className="header__sign">
-                    <Link className="main__link header__sign-up" to="signup">Регистрация</Link>
-                    <Link className="main__link header__sign-in" to="signin">Войти</Link>
+                    <Link className="main__link header__sign-up" to={REGISTER_PAGE}>Регистрация</Link>
+                    <Link className="main__link header__sign-in" to={LOGIN_PAGE}>Войти</Link>
                   </div>
                 </>
               )}
@@ -24,13 +27,13 @@ function Header({ logged }) {
                 <Navigation />
               )}
             </Route>
-            <Route path="/movies">
+            <Route path={MOVIES_PAGE}>
               <Navigation />
             </Route>
-            <Route path="/saved-movies">
+            <Route path={SAVED_MOVIES_PAGE}>
               <Navigation />
             </Route>
-            <Route path="/profile">
+            <Route path={PROFILE_PAGE}>
               <Navigation />
             </Route>
           </Switch>

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import PopupForm from "../PopupForm/PopupForm";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import useCustomForm from "../../hooks/useCustomForm";
-import { PATTERN_NAME } from "../../utils/constants";
+import { MAX_LENGTH_NAME, MIN_LENGTH_NAME, PATTERN_NAME } from "../../utils/constants";
 import './Profile.css';
 
 function Profile({ onLogout, onEditUser, errorResultApi, okResultApi, loading }) {
@@ -49,8 +49,8 @@ function Profile({ onLogout, onEditUser, errorResultApi, okResultApi, loading })
           placeholder="Имя"
           className={`popup__input popup__input_form_profile`}
           type="text"
-          minLength="2"
-          maxLength="40"
+          minLength={MIN_LENGTH_NAME}
+          maxLength={MAX_LENGTH_NAME}
           autoComplete="off"
           required
         />
@@ -75,8 +75,8 @@ function Profile({ onLogout, onEditUser, errorResultApi, okResultApi, loading })
           placeholder="E-mail"
           className={`popup__input popup__input_no-boder popup__input_form_profile`}
           type="email"
-          minLength="2"
-          maxLength="40"
+          minLength={MIN_LENGTH_NAME}
+          maxLength={MAX_LENGTH_NAME}
           autoComplete="off"
           required
         />

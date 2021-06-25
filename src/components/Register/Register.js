@@ -3,7 +3,10 @@ import Logo from "../Logo/Logo";
 import { Link } from "react-router-dom";
 import useCustomForm from "../../hooks/useCustomForm";
 import './Register.css';
-import { PATTERN_NAME } from "../../utils/constants";
+import {
+  MAIN_PAGE, MIN_LENGTH_PASSWORD, LOGIN_PAGE, MAX_LENGTH_EMAIL, MAX_LENGTH_NAME, MAX_LENGTH_PASSWORD,
+  MIN_LENGTH_EMAIL, MIN_LENGTH_NAME, PATTERN_NAME
+} from "../../utils/constants";
 
 function Register({ onRegister, errorResultApi, loading }) {
   const {
@@ -15,7 +18,7 @@ function Register({ onRegister, errorResultApi, loading }) {
   } = useCustomForm({ onSubmit: (values) => onRegister(values) });
   return (
     <>
-      <Link className="main__link register__link" to="/">
+      <Link className="main__link register__link" to={MAIN_PAGE}>
         <Logo />
       </Link>
       <PopupForm
@@ -24,7 +27,7 @@ function Register({ onRegister, errorResultApi, loading }) {
         buttonName="Зарегистрироваться"
         underButtonText="Уже зарегистрированы?"
         underButtonName="Войти"
-        path="/signin"
+        path={LOGIN_PAGE}
         onSubmit={handleSubmit}
         validForm={validForm}
         loading={loading}
@@ -41,8 +44,8 @@ function Register({ onRegister, errorResultApi, loading }) {
             pattern={PATTERN_NAME}
             className="popup__input"
             type="text"
-            minLength="2"
-            maxLength="40"
+            minLength={MIN_LENGTH_NAME}
+            maxLength={MAX_LENGTH_NAME}
             autoComplete="off"
             required
           />
@@ -66,8 +69,8 @@ function Register({ onRegister, errorResultApi, loading }) {
             placeholder="Email"
             className="popup__input"
             type="email"
-            minLength="2"
-            maxLength="40"
+            minLength={MIN_LENGTH_EMAIL}
+            maxLength={MAX_LENGTH_EMAIL}
             autoComplete="off"
             required
           />
@@ -91,8 +94,8 @@ function Register({ onRegister, errorResultApi, loading }) {
             placeholder="Пароль"
             className="popup__input"
             type="password"
-            minLength="2"
-            maxLength="100"
+            minLength={MIN_LENGTH_PASSWORD}
+            maxLength={MAX_LENGTH_PASSWORD}
             autoComplete="off"
             required
           />

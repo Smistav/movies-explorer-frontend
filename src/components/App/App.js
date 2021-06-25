@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import {
+  Route, Switch, useHistory,
+  // useLocation 
+} from "react-router-dom";
 import Main from "../Main/Main";
 import Header from "../Header/Header";
 import Movies from "../Movies/Movies";
@@ -12,7 +15,13 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 import './App.css';
-import { URL_SERVER_MOVIES_API, OK_RESULT_API } from "../../utils/constants";
+import {
+  URL_SERVER_MOVIES_API, OK_RESULT_API,
+  // PAGE_WITHOUT_AUTH, 
+  JWT, LS_CARDS, LS_SAVED_CARDS,
+  LS_FILTERED_CARDS, LS_FILTERED_SAVED_CARDS, MAIN_PAGE, MOVIES_PAGE, SAVED_MOVIES_PAGE,
+  PROFILE_PAGE, LOGIN_PAGE, REGISTER_PAGE
+} from "../../utils/constants";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
@@ -32,6 +41,7 @@ function App() {
   const [checkboxSavedCards, setCheckboxSavedCards] = useState(true);// Состояние чекбокса в SavedCards
   const [checkboxCards, setCheckboxCards] = useState(true);// Состояние чекбокса в Cards
   const history = useHistory();
+  // const location = useLocation();
 
   function handleCheckboxSavedCards() {
     setCheckboxSavedCards(!checkboxSavedCards);
@@ -39,10 +49,12 @@ function App() {
   function handleCheckboxCards() {
     setCheckboxCards(!checkboxCards);
   }
+
   useEffect(() => {
     function checkToken() {
-      if (localStorage.getItem("jwt")) {
-        const jwt = localStorage.getItem("jwt");
+      // const pathname = location.pathname;
+      if (localStorage.getItem(JWT)) {
+        const jwt = localStorage.getItem(JWT);
         mainApi
           .checkToken(jwt)
           .then((userInfo) => {
@@ -52,23 +64,36 @@ function App() {
           .catch((err) => {
             console.log(err);
           });
+      } else {
+        // PAGE_WITHOUT_AUTH.includes(pathname) ? history.push(pathname) : history.push(MAIN_PAGE);
       }
     }
     checkToken();
-  }, [history]);
+  }, [])
+  // useEffect(() => {
+  //   Promise.all([checkToken()])
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   useEffect(() => {
-    if (!localStorage.getItem("saved-cards") && logged) {
-      getSavedMovies();
-    } else {
-      setSavedCards(JSON.parse(localStorage.getItem("saved-cards")));
+    if (logged) {
+      if (!localStorage.getItem(LS_SAVED_CARDS)) {
+        getSavedMovies();
+      } else {
+        setSavedCards(JSON.parse(localStorage.getItem(LS_SAVED_CARDS)));
+      }
     }
   }, [currentUser, logged]);
 
   useEffect(() => {
     if (logged) {
       mainApi
-        .getUser(localStorage.getItem("jwt"))
+        .getUser(localStorage.getItem(JWT))
         .then((userInfo) => {
           setCurrentUser(userInfo);
         })
@@ -79,19 +104,19 @@ function App() {
   }, [logged]);
   // Если пользователь уже делал поиск то монтируем cards из LS
   useEffect(() => {
-    localStorage.getItem("cards") && setCards(JSON.parse(localStorage.getItem("cards")));
+    localStorage.getItem(LS_CARDS) && setCards(JSON.parse(localStorage.getItem(LS_CARDS)));
   }, []);
   // проверяем в LS filtered-cards и saved-filtered-cards при монтировании
   // если пользователь вернулся(не забыть удалять после logout)
   useEffect(() => {
-    localStorage.getItem("filtered-cards") && setFilteredCards(
-      JSON.parse(localStorage.getItem("filtered-cards")));
-    localStorage.getItem("filtered-saved-cards") && setFilteredSavedCards(
-      JSON.parse(localStorage.getItem("filtered-saved-cards")));
+    localStorage.getItem(LS_FILTERED_CARDS) && setFilteredCards(
+      JSON.parse(localStorage.getItem(LS_FILTERED_CARDS)));
+    localStorage.getItem(LS_FILTERED_SAVED_CARDS) && setFilteredSavedCards(
+      JSON.parse(localStorage.getItem(LS_FILTERED_SAVED_CARDS)));
   }, []);
   // Отслеживаем по SavedCards данные в LS когда удаляем или добавляем карточку.
   useEffect(() => {
-    logged && localStorage.setItem("saved-cards", JSON.stringify(savedCards));
+    logged && localStorage.setItem(LS_SAVED_CARDS, JSON.stringify(savedCards));
   }, [savedCards, logged]);
 
   // В начале загрузки 
@@ -131,25 +156,25 @@ function App() {
     setEmptyResultQuery(false);
     setErrorQuery(false);
     setLoading(true);
-    if (!localStorage.getItem("cards")) {
+    if (!localStorage.getItem(LS_CARDS)) {
       setLoading(true);
       moviesApi
         .getMovieCards()
         .then((cards) => {
           convertCards = cards.map(card => convertCard(card));
           setCards(convertCards);
-          localStorage.setItem("cards", JSON.stringify(convertCards));
+          localStorage.setItem(LS_CARDS, JSON.stringify(convertCards));
           setLoading(false);
-          setFilteredCards(filteredQuery(query, convertCards, "filtered-cards"));
+          setFilteredCards(filteredQuery(query, convertCards, LS_FILTERED_CARDS));
         })
         .catch(() => {
           setLoading(false);
           setErrorQuery(true);
         });
     } else {
-      setCards(JSON.parse(localStorage.getItem("cards")));
+      setCards(JSON.parse(localStorage.getItem(LS_CARDS)));
       setLoading(false);
-      setFilteredCards(filteredQuery(query, cards, "filtered-cards"));
+      setFilteredCards(filteredQuery(query, cards, LS_FILTERED_CARDS));
     }
   }
   function handleQuerySubmitSaved(query) {
@@ -157,24 +182,24 @@ function App() {
     setEmptyResultQuery(false);
     setErrorQuery(false);
     setLoading(true);
-    if (!localStorage.getItem("saved-cards")) {
+    if (!localStorage.getItem(LS_SAVED_CARDS)) {
       setLoading(true);
       mainApi
-        .getMovieCards(localStorage.getItem("jwt"))
+        .getMovieCards(localStorage.getItem(JWT))
         .then((cards) => {
           setSavedCards(cards);
-          localStorage.setItem("saved-cards", JSON.stringify(cards));
+          localStorage.setItem(LS_SAVED_CARDS, JSON.stringify(cards));
           setLoading(false);
-          setFilteredSavedCards(filteredQuery(query, cards, "filtered-saved-cards"));
+          setFilteredSavedCards(filteredQuery(query, cards, LS_FILTERED_SAVED_CARDS));
         })
         .catch(() => {
           setLoading(false);
           setErrorQuery(true);
         });
     } else {
-      setSavedCards(JSON.parse(localStorage.getItem("saved-cards")));
+      setSavedCards(JSON.parse(localStorage.getItem(LS_SAVED_CARDS)));
       setLoading(false);
-      setFilteredSavedCards(filteredQuery(query, savedCards, "filtered-saved-cards"));
+      setFilteredSavedCards(filteredQuery(query, savedCards, LS_FILTERED_SAVED_CARDS));
     }
   }
   function handleCardLike(card) {
@@ -188,7 +213,7 @@ function App() {
       .changeLikeCardStatus({
         country, director, duration, year, description, image, trailer, thumbnail,
         nameEN, nameRU, movieId
-      }, deleteCard._id, !isLiked, localStorage.getItem("jwt"))
+      }, deleteCard._id, !isLiked, localStorage.getItem(JWT))
       .then((likeCard) => {
         setFilteredCards((state) => state.map((c) => (c.id === card.id ? card : c)));
         !isLiked ? setSavedCards([...savedCards, likeCard]) :
@@ -202,7 +227,7 @@ function App() {
     setLoading(true);
     setErrorResultApi('');
     mainApi
-      .sign(onRegister, '/signup')
+      .sign(onRegister, REGISTER_PAGE)
       .then(({ email }) => {
         setLoading(false);
         handleLogin({ email, password: onRegister.password })
@@ -213,10 +238,10 @@ function App() {
       })
   }
   function resetLS() {
-    localStorage.removeItem("saved-cards");
-    localStorage.removeItem("filtered-cards");
-    localStorage.removeItem("filtered-saved-cards");
-    localStorage.removeItem("jwt");
+    localStorage.removeItem(LS_SAVED_CARDS);
+    localStorage.removeItem(LS_FILTERED_CARDS);
+    localStorage.removeItem(LS_FILTERED_SAVED_CARDS);
+    localStorage.removeItem(JWT);
   }
   function resetFilter() {
     setFilteredCards([]);
@@ -225,10 +250,10 @@ function App() {
   // при заходе пользователя монтируем saved-cards либо из API либо из LS
   function getSavedMovies() {
     mainApi
-      .getMovieCards(localStorage.getItem("jwt"))
+      .getMovieCards(localStorage.getItem(JWT))
       .then((cards) => {
         setSavedCards(cards);
-        localStorage.setItem("saved-cards", JSON.stringify(cards));
+        localStorage.setItem(LS_SAVED_CARDS, JSON.stringify(cards));
       })
       .catch((err) => {
         console.log(err);
@@ -238,14 +263,14 @@ function App() {
     setLoading(true);
     setErrorResultApi('');
     mainApi
-      .sign(onLogin, "/signin")
+      .sign(onLogin, LOGIN_PAGE)
       .then((jwt) => {
         if (jwt) {
-          localStorage.setItem("jwt", jwt.token);
+          localStorage.setItem(JWT, jwt.token);
           setLogged(true);
           setLoading(false);
           getSavedMovies();
-          history.push("/movies");
+          history.push(MOVIES_PAGE);
         } else {
           throw jwt;
         }
@@ -260,7 +285,7 @@ function App() {
     setErrorResultApi('');
     setOkResultApi('');
     mainApi
-      .setUser(onEditUser, localStorage.getItem("jwt"))
+      .setUser(onEditUser, localStorage.getItem(JWT))
       .then((userInfo) => {
         setCurrentUser(userInfo);
         setLoading(false);
@@ -276,19 +301,19 @@ function App() {
     setCurrentUser({ name: "", email: "" });
     resetLS();
     resetFilter();
-    history.push("/");
+    history.push(MAIN_PAGE);
   }
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
         <Header logged={logged} />
         <Switch>
-          <Route exact path="/">
+          <Route exact path={MAIN_PAGE}>
             <Main />
           </Route>
           <ProtectedRoute
             logged={logged}
-            path="/movies"
+            path={MOVIES_PAGE}
             component={Movies}
             onSubmit={handleQuerySubmit}
             loading={loading}
@@ -305,7 +330,7 @@ function App() {
           <ProtectedRoute
             component={SavedMovies}
             logged={logged}
-            path="/saved-movies"
+            path={SAVED_MOVIES_PAGE}
             onSubmit={handleQuerySubmitSaved}
             loading={loading}
             errorQuery={errorQuery}
@@ -319,7 +344,7 @@ function App() {
           />
           <ProtectedRoute
             component={Profile}
-            path="/profile"
+            path={PROFILE_PAGE}
             logged={logged}
             onEditUser={handleEditUser}
             errorResultApi={errorResultApi}
@@ -327,14 +352,14 @@ function App() {
             loading={loading}
             onLogout={handleLogout}
           />
-          <Route path="/signin">
+          <Route path={LOGIN_PAGE}>
             <Login
               onLogin={handleLogin}
               loading={loading}
               errorResultApi={errorResultApi}
             />
           </Route>
-          <Route path="/signup">
+          <Route path={REGISTER_PAGE}>
             <Register
               onRegister={handleRegister}
               loading={loading}

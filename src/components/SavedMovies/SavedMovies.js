@@ -5,7 +5,7 @@ import SearchForm from "../Movies/SearchForm/SearchForm";
 import Devider from "./Devider/Devider";
 import Preloader from '../Preloader/Preloader';
 import ErrorQuery from '../Movies/SearchForm/ErrorQuery/ErrorQuery';
-import { ERROR_QUERY, EMPTY_QUERY, EMPTY_RESULT } from '../../utils/constants';
+import { ERROR_QUERY, EMPTY_QUERY, EMPTY_RESULT, SHORT_MOVIES_DURATION } from '../../utils/constants';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function SavedMovies({ savedCards, filteredSavedCards = "", loading, errorQuery,
@@ -18,7 +18,7 @@ function SavedMovies({ savedCards, filteredSavedCards = "", loading, errorQuery,
   }
   useEffect(() => {
     const cards = filteredSavedCards.length !== 0 ? filteredSavedCards : savedCards;
-    setShortSavedMovies(cards.filter(card => card.duration <= 40));
+    setShortSavedMovies(cards.filter(card => card.duration <= SHORT_MOVIES_DURATION));
   }, [savedCards, filteredSavedCards]);
 
   return (

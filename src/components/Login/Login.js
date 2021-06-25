@@ -3,6 +3,10 @@ import Logo from "../Logo/Logo";
 import { Link } from "react-router-dom";
 import useCustomForm from "../../hooks/useCustomForm";
 import './Login.css';
+import {
+  MAIN_PAGE, REGISTER_PAGE, MIN_LENGTH_PASSWORD, MAX_LENGTH_PASSWORD,
+  MIN_LENGTH_EMAIL, MAX_LENGTH_EMAIL
+} from '../../utils/constants';
 
 function Login({ onLogin, errorResultApi, loading }) {
   const {
@@ -14,7 +18,7 @@ function Login({ onLogin, errorResultApi, loading }) {
   } = useCustomForm({ onSubmit: (values) => onLogin(values) });
   return (
     <>
-      <Link className="main__link login__link" to="/">
+      <Link className="main__link login__link" to={MAIN_PAGE}>
         <Logo />
       </Link>
       <PopupForm
@@ -23,7 +27,7 @@ function Login({ onLogin, errorResultApi, loading }) {
         buttonName="Войти"
         underButtonText="Ещё не зарегистрированы?"
         underButtonName="Регистрация"
-        path="/signup"
+        path={REGISTER_PAGE}
         onSubmit={handleSubmit}
         validForm={validForm}
         loading={loading}
@@ -39,8 +43,8 @@ function Login({ onLogin, errorResultApi, loading }) {
             placeholder="Email"
             className="popup__input"
             type="email"
-            minLength="2"
-            maxLength="40"
+            minLength={MIN_LENGTH_EMAIL}
+            maxLength={MAX_LENGTH_EMAIL}
             autoComplete="off"
             required
           />
@@ -64,8 +68,8 @@ function Login({ onLogin, errorResultApi, loading }) {
             placeholder="Пароль"
             className="popup__input"
             type="password"
-            minLength="2"
-            maxLength="100"
+            minLength={MIN_LENGTH_PASSWORD}
+            maxLength={MAX_LENGTH_PASSWORD}
             autoComplete="off"
             required
           />

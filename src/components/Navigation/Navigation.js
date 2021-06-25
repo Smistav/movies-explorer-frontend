@@ -1,15 +1,14 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Navigation.css';
 import './NavigationTablet.css';
 import './NavigationPhone.css';
 import account_icon from "../../images/account-icon.svg";
 import menu_icon_close from '../../images/icon_menu_close.svg';
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Logo from '../Logo/Logo';
+import { MAIN_PAGE, MOVIES_PAGE, PROFILE_PAGE, SAVED_MOVIES_PAGE } from '../../utils/constants';
 
 function Navigation() {
-  const currentUser = useContext(CurrentUserContext);
   const [activeMenu, setActiveMenu] = useState(false);
   const [activeMenuT, setActiveMenuT] = useState(false);
   function handleClick() {
@@ -21,19 +20,19 @@ function Navigation() {
   return (
     <>
       <nav className="menu">
-        <NavLink exact to="/" activeClassName="menu__link_active" className="main__link menu__link">
+        <NavLink exact to={MAIN_PAGE} activeClassName="menu__link_active" className="main__link menu__link">
           <Logo />
         </NavLink>
         <div className='menu__block-link'>
-          <NavLink to="/movies" activeClassName="menu__link_active" className="main__link menu__link">
+          <NavLink to={MOVIES_PAGE} activeClassName="menu__link_active" className="main__link menu__link">
             Фильмы
         </NavLink>
-          <NavLink to="/saved-movies" activeClassName="menu__link_active"
+          <NavLink to={SAVED_MOVIES_PAGE} activeClassName="menu__link_active"
             className="main__link menu__link">
             Сохраненные фильмы
         </NavLink>
         </div>
-        <NavLink to="/profile" activeClassName="menu__link_active" className="main__link 
+        <NavLink to={PROFILE_PAGE} activeClassName="menu__link_active" className="main__link 
         menu__link menu__link-image">
           Аккаунт
         <img src={account_icon} alt="иконка" className="main__link menu__account-icon" />
@@ -43,21 +42,21 @@ function Navigation() {
         </div>
       </nav>
       <nav onClick={handleClick} className={`menu-tablet ${activeMenuT ? "menu-tablet_visible" : ""}`}>
-        <NavLink exact to="/" activeClassName="menu-tablet__link_active" className="main__link 
+        <NavLink exact to={MAIN_PAGE} activeClassName="menu-tablet__link_active" className="main__link 
         menu-tablet__link">
           Главная
         </NavLink>
         <div className='menu-tablet__block-link'>
-          <NavLink to="/movies" activeClassName="menu-tablet__link_active" className="main__link 
+          <NavLink to={MOVIES_PAGE} activeClassName="menu-tablet__link_active" className="main__link 
           menu-tablet__link">
             Фильмы
       </NavLink>
-          <NavLink to="/saved-movies" activeClassName="menu-tablet__link_active"
+          <NavLink to={SAVED_MOVIES_PAGE} activeClassName="menu-tablet__link_active"
             className="main__link menu-tablet__link">
             Сохраненные фильмы
       </NavLink>
         </div>
-        <NavLink to="/profile" activeClassName="menu-tablet__link_active" className="main__link 
+        <NavLink to={PROFILE_PAGE} activeClassName="menu-tablet__link_active" className="main__link 
         menu-tablet__link menu-tablet__link-image">
           Аккаунт
       <img src={account_icon} alt="" className="main__link menu-tablet__account-icon" />
@@ -67,21 +66,21 @@ function Navigation() {
         </div>
       </nav>
       <nav onClick={handleClick} className={`menu-phone ${activeMenu ? "menu-phone_visible" : ""}`}>
-        <NavLink exact to="/" activeClassName="menu-phone__link_active" className="main__link 
+        <NavLink exact to={MAIN_PAGE} activeClassName="menu-phone__link_active" className="main__link 
         menu-phone__link">
           Главная
         </NavLink>
         <div className='menu-phone__block-link'>
-          <NavLink to="/movies" activeClassName="menu-phone__link_active" className="main__link 
+          <NavLink to={MOVIES_PAGE} activeClassName="menu-phone__link_active" className="main__link 
           menu-phone__link">
             Фильмы
       </NavLink>
-          <NavLink to="/saved-movies" activeClassName="menu-phone__link_active"
+          <NavLink to={SAVED_MOVIES_PAGE} activeClassName="menu-phone__link_active"
             className="main__link menu-phone__link">
             Сохраненные фильмы
       </NavLink>
         </div>
-        <NavLink to="/profile" activeClassName="menu-phone__link_active" className="main__link 
+        <NavLink to={PROFILE_PAGE} activeClassName="menu-phone__link_active" className="main__link 
         menu-phone__link menu-phone__link-image">
           Аккаунт
       <img src={account_icon} alt="" className="main__link menu-phone__account-icon" />

@@ -7,7 +7,7 @@ import ErrorQuery from './SearchForm/ErrorQuery/ErrorQuery'
 import More from "./More/More";
 import {
   ADD_CARDS_1280, ADD_CARDS_768_320, INIT_CARDS_1280, INIT_CARDS_768,
-  INIT_CARDS_320, ERROR_QUERY, EMPTY_QUERY, EMPTY_RESULT
+  INIT_CARDS_320, ERROR_QUERY, EMPTY_QUERY, EMPTY_RESULT, SHORT_MOVIES_DURATION
 } from '../../utils/constants';
 
 function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQuery,
@@ -36,7 +36,7 @@ function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQue
   }
   // При монтировании сразу отфильтруем список коротких фильмов
   useEffect(() => {
-    setShortMovies(filteredCards.filter(card => card.duration <= 40));
+    setShortMovies(filteredCards.filter(card => card.duration <= SHORT_MOVIES_DURATION));
   }, [filteredCards]);
   useEffect(() => {
     window.addEventListener("resize", setCountCard);

@@ -2,7 +2,8 @@ import './MoviesCard.css';
 import Card from '../../Card/Card';
 
 function MoviesCard({ card, savedCards, onCardLike, owner }) {
-  const isLiked = savedCards.some((savedCard) => (savedCard.movieId === card.id && savedCard.owner === owner))
+  const isLiked = savedCards.some((savedCard) => (savedCard.movieId ===
+    card.id && savedCard.owner === owner))
 
   function handleLikeClick() {
     onCardLike(card);
