@@ -24,6 +24,7 @@ export const ERROR_QUERY = "Во время запроса произошла о
 export const EMPTY_QUERY = "Нужно ввести ключевое слово";
 export const EMPTY_RESULT = "Ничего не найдено";
 export const OK_RESULT_API = 'Изменения успешно приняты';
+export const POPUP_ERROR = 'Что то пошло не так... Просьба обратиться в службу поддержки';
 // Form Input
 export const PATTERN_NAME = '^[a-zA-Zа-яёА-ЯЁ -]{2,30}$';
 //Страницы

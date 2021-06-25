@@ -9,9 +9,10 @@ import {
   ADD_CARDS_1280, ADD_CARDS_768_320, INIT_CARDS_1280, INIT_CARDS_768,
   INIT_CARDS_320, ERROR_QUERY, EMPTY_QUERY, EMPTY_RESULT, SHORT_MOVIES_DURATION
 } from '../../utils/constants';
+import PopupError from "../PopupError/PopupError";
 
 function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQuery,
-  onSubmit, onCardLike, savedCards, owner, onCheckbox, checkbox }) {
+  onSubmit, onCardLike, savedCards, owner, onCheckbox, checkbox, popupError }) {
   function setCountCard(str) {
     let initCountCards = 0;
     let addCountCards = 0;
@@ -59,6 +60,7 @@ function Movies({ filteredCards = "", loading, errorQuery, emptyResult, emptyQue
       <div className="main__container movies__container">
         <SearchForm onSubmit={onSubmit} onCheckbox={onCheckbox} checkbox={checkbox} />
         {loading && (<Preloader />)}
+        {popupError && (<PopupError errorName={popupError} />)}
         {errorQuery && (<ErrorQuery errorName={ERROR_QUERY} />)}
         {emptyQuery && (<ErrorQuery errorName={EMPTY_QUERY} />)}
         {emptyResult && (<ErrorQuery errorName={EMPTY_RESULT} />)}

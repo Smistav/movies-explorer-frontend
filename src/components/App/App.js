@@ -20,7 +20,7 @@ import {
   // PAGE_WITHOUT_AUTH, 
   JWT, LS_CARDS, LS_SAVED_CARDS,
   LS_FILTERED_CARDS, LS_FILTERED_SAVED_CARDS, MAIN_PAGE, MOVIES_PAGE, SAVED_MOVIES_PAGE,
-  PROFILE_PAGE, LOGIN_PAGE, REGISTER_PAGE
+  PROFILE_PAGE, LOGIN_PAGE, REGISTER_PAGE, POPUP_ERROR
 } from "../../utils/constants";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
@@ -41,6 +41,7 @@ function App() {
   const [checkboxSavedCards, setCheckboxSavedCards] = useState(true);// Состояние чекбокса в SavedCards
   const [checkboxCards, setCheckboxCards] = useState(true);// Состояние чекбокса в Cards
   const history = useHistory();
+  const [popupError, setPopupError] = useState('');
   // const location = useLocation();
 
   function handleCheckboxSavedCards() {
@@ -200,6 +201,7 @@ function App() {
       ((savedCard.movieId === (card.id || card.movieId)) && savedCard.owner === currentUser._id));
     const deleteCard = savedCards.find((savedCard) => (
       (savedCard.movieId === (card.id || card.movieId)) && savedCard.owner === currentUser._id)) || '';
+    setPopupError('');
     mainApi
       .changeLikeCardStatus({
         country, director, duration, year, description, image, trailer, thumbnail,
@@ -211,7 +213,8 @@ function App() {
           setSavedCards((state) => state.filter((c) => c.movieId !== (card.id || card.movieId)));
       })
       .catch((err) => {
-        console.log(err);
+        setPopupError(POPUP_ERROR);
+        setTimeout(setPopupError, 1000, '');
       });
   }
   function handleRegister(onRegister) {
@@ -318,6 +321,7 @@ function App() {
             owner={currentUser._id}
             onCheckbox={handleCheckboxCards}
             checkbox={checkboxCards}
+            popupError={popupError}
           />
           <ProtectedRoute
             component={SavedMovies}
