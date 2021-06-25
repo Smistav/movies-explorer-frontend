@@ -265,7 +265,7 @@ function App() {
           setLogged(true);
           setLoading(false);
           getSavedMovies();
-          history.push(MOVIES_PAGE);
+          history.push(MAIN_PAGE);
         } else {
           throw jwt;
         }
