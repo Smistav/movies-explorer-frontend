@@ -1,0 +1,39 @@
+.popup-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+.popup-error:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #000;
+  opacity: 0.5;
+}
+.popup-error__container {
+  width: 250px;
+  height: 100px;
+  position: fixed;
+  z-index: 11;
+}
+
+.popup-error__text {
+  width: 100%;
+  height: 100%;
+  background: rgba(66, 133, 244, 0.5);
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  display: flex;
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+}

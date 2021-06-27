@@ -1,13 +1,24 @@
-import React from "react";
 import PopupForm from '../PopupForm/PopupForm';
 import Logo from "../Logo/Logo";
 import { Link } from "react-router-dom";
+import useCustomForm from "../../hooks/useCustomForm";
 import './Login.css';
+import {
+  MAIN_PAGE, REGISTER_PAGE, MIN_LENGTH_PASSWORD, MAX_LENGTH_PASSWORD,
+  MIN_LENGTH_EMAIL, MAX_LENGTH_EMAIL
+} from '../../utils/constants';
 
-function Login() {
+function Login({ onLogin, errorResultApi, loading }) {
+  const {
+    values,
+    errors,
+    validForm,
+    handleChange,
+    handleSubmit,
+  } = useCustomForm({ onSubmit: (values) => onLogin(values) });
   return (
     <>
-      <Link className="main__link login__link" to="/">
+      <Link className="main__link login__link" to={MAIN_PAGE}>
         <Logo />
       </Link>
       <PopupForm
@@ -16,41 +27,61 @@ function Login() {
         buttonName="Войти"
         underButtonText="Ещё не зарегистрированы?"
         underButtonName="Регистрация"
-        path="/signup"
+        path={REGISTER_PAGE}
+        onSubmit={handleSubmit}
+        validForm={validForm}
+        loading={loading}
+        errorResultApi={errorResultApi}
       >
         <div className="popup__input-container">
           <p className="popup__input-header">E-mail</p>
           <input
             id="email-input"
             name="email"
+            value={values.email || ''}
+            onChange={handleChange}
             placeholder="Email"
             className="popup__input"
             type="email"
-            minLength="2"
-            maxLength="40"
+            minLength={MIN_LENGTH_EMAIL}
+            maxLength={MAX_LENGTH_EMAIL}
             autoComplete="off"
             required
           />
-          <span id="email-input-error" className="popup__error popup__error_visible">
-            Что-то пошло не так...
-          </span>
+          {errors.email && (
+            <span
+              id="email-input-error"
+              className={`popup__error ${errors.email ? "popup__error_visible" : ""
+                }`}
+            >
+              {errors.email}
+            </span>
+          )}
         </div>
         <div className="popup__input-container">
           <p className="popup__input-header">Пароль</p>
           <input
             id="password"
             name="password"
+            value={values.password || ''}
+            onChange={handleChange}
             placeholder="Пароль"
             className="popup__input"
             type="password"
-            minLength="2"
-            maxLength="100"
+            minLength={MIN_LENGTH_PASSWORD}
+            maxLength={MAX_LENGTH_PASSWORD}
             autoComplete="off"
             required
           />
-          <span id="password-input-error" className="popup__error">
-            Что-то пошло не так...
-          </span>
+          {errors.password && (
+            <span
+              id="password-input-error"
+              className={`popup__error ${errors.password ? "popup__error_visible" : ""
+                }`}
+            >
+              {errors.password}
+            </span>
+          )}
         </div>
       </PopupForm>
     </>

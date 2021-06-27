@@ -9,6 +9,9 @@
   height: auto;
   margin: 0 auto;
 }
+.popup__container_hover {
+  opacity: 0.5;
+}
 .popup__header {
   color: #fff;
   font-style: normal;
@@ -98,12 +101,47 @@
   left: 0;
   top: 51px;
 }
+.popup__ok {
+  display: none;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: #fff;
+  position: absolute;
+  left: 0;
+  top: 51px;
+}
 .popup__error_visible {
+  display: block;
+}
+.popup__ok_visible {
   display: block;
 }
 /* Component Login */
 .popup__button_form_login {
   margin-top: 192px;
+  position: relative;
+}
+.popup__button_form_login_disabled {
+  opacity: 0.2;
+  cursor: unset;
+}
+
+.popup__button_form_login_disabled:hover {
+  opacity: 0.2;
+}
+.popup__error_form_login {
+  top: -25px;
+  width: 100%;
+  text-align: center;
+  cursor: unset;
+}
+.popup__ok_form_login {
+  top: -25px;
+  width: 100%;
+  text-align: center;
+  cursor: unset;
 }
 @media screen and (max-width: 768px) {
   .popup__button_form_login {
@@ -132,6 +170,26 @@
 /* Component Register */
 .popup__button_form_register {
   margin-top: 122px;
+  position: relative;
+}
+.popup__button_form_register_disabled {
+  opacity: 0.2;
+  cursor: unset;
+}
+.popup__button_form_register_disabled:hover {
+  opacity: 0.2;
+}
+.popup__error_form_register {
+  top: -25px;
+  width: 100%;
+  text-align: center;
+  cursor: unset;
+}
+.popup__ok_form_register {
+  top: -25px;
+  width: 100%;
+  text-align: center;
+  cursor: unset;
 }
 @media screen and (max-width: 768px) {
   .popup__button_form_register {
@@ -206,6 +264,7 @@
   padding: 0;
   outline: none;
   box-sizing: border-box;
+  position: relative;
 }
 .popup__block-link_form_profile {
   font-style: normal;
@@ -225,6 +284,25 @@
 }
 .popup__link-bottom_form_profile {
   color: #4285f4;
+}
+.popup__button_form_profile_disabled {
+  opacity: 0.2;
+  cursor: unset;
+}
+.popup__button_form_profile_disabled:hover {
+  opacity: 0.2;
+}
+.popup__error_form_profile {
+  top: -25px;
+  width: 100%;
+  text-align: center;
+  cursor: unset;
+}
+.popup__ok_form_profile {
+  top: -25px;
+  width: 100%;
+  text-align: center;
+  cursor: unset;
 }
 @media screen and (max-width: 768px) {
   .popup__header_form_profile {
