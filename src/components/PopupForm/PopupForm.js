@@ -8,7 +8,7 @@ function PopupForm({ name, title, buttonName, underButtonText,
     <div>
       {loading && (<Preloader />)}
       <form
-        onSubmit={onSubmit}
+        onSubmit={loading ? undefined : onSubmit}
         name={`form_${name}`}
         className={`popup__container popup__container_form_${name} ${loading ? 'popup__container_hover' : ''}`}
         noValidate>
