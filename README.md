@@ -6,10 +6,6 @@
 
 HTML,CSS,JS, React, Node js, Express, MongoDb
 
-### Ссылка на проект
-
-https://smistav.nomoredomains.icu/
-
 ### Для развертывания проекта
 
 1. Клонируйте репозиторий
